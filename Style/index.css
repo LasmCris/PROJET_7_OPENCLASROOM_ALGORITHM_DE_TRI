@@ -1,0 +1,556 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+        header {
+            /* border: 2px solid black; */
+            /* margin: 5px; */
+            height: 525px;
+            display: flex;
+            flex-direction: column;
+
+
+            background-image: url("/asset/Photos_logo_header/lampos-aritonang-24gR_9lCdes-unsplash\ 1.png");
+            background-size: cover; /* j'ajuste la taille de l'image pour qu'elle couvre entièrement le header */
+            background-position: center;
+            background-repeat: no-repeat;
+            /* j'ajoute un degradé de couleur en cas d'echec de chargement de la page */
+            background-color: #f0f0f0;
+        }
+
+
+
+            .header__figure {
+                /* border: 2px solid white; */
+                width: 193px;
+                margin-left: 20px;
+                padding: 2px;
+                margin-bottom: 150px;
+
+
+            }
+
+                .figure__logo {
+                    /* border: 2px solid white; */
+                    width: 100%;
+
+                }
+
+
+
+
+
+
+
+            .header__divSloganSite{
+                /* border: 2px solid white; */
+                color: #FFD15B;
+                margin-bottom: 40px;
+
+            }
+
+
+                .divSloganSite__slogan {
+                    /* border: 2px solid white; */
+                    text-align: center;
+                    font-family: Anton;
+                    font-size: 30px;
+
+                }
+
+
+
+
+            .header__sectionRecherche {
+                /* border: 2px solid #ffffff; */
+                height: 55px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+
+            }
+
+                    .sectionRecherche__formulaire {
+                        /* border: 2px solid #ffffff; */
+                        background-color: white;
+                        height: 100%;
+                        width: 50%;
+                        border-radius: 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                            
+                    }
+
+
+                        .formulaire__inputSearch {
+                            text-decoration: none;
+                            width: 90%;
+                            height: 100%;
+                            border-radius: 10px;
+                            padding-left: 10px;
+                        
+                        }
+
+                            ::placeholder {
+                                font-size: 16px;
+                            }
+
+
+
+                        .formulaire__inputSearch:focus {
+                            border-color: #f0f0f0;
+                        }
+
+
+                        .formulaire__labelLoop {
+                            cursor: pointer;
+                            width: 8%;
+                            height: 88%;
+                            border-radius: 10px;
+                            /* border: 2px solid #ffffff; */
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: black;
+
+                        }
+
+
+                            .fas.fa-search {
+                                color: white;
+                            }
+
+
+
+
+
+                        
+
+
+
+
+    main {
+        /* border: 2px solid black;
+        margin: 5px; */
+        background-color: rgb(247, 244, 244);
+
+    }
+
+
+        .sectionTri {
+            /* border: 2px solid black; */
+            margin: 5px;
+            margin-top: 20px;
+            display: flex;
+
+        }
+
+
+            .sectionTri__parametreDeTri {
+                /* border: 2px solid black; */
+                margin: 5px;
+                width: 90%;
+
+                display: flex;
+
+            }
+
+
+                        .sectionTri__parametreDeTri .dropdown {
+                            /* border: 2px solid black; */
+                            margin: 5px;
+                            width: 20%;
+                            /* height: 90%; */
+
+                            display: flex;
+                            flex-direction: column;
+                            /* align-items: center; */
+                            margin-bottom: 30px;
+                            /* background-color: white; */
+                            border-radius: 8px 8px 0 0;
+                        }
+
+
+
+
+                        .divDropBtnIngredients, .divDropBtnAppareils, .divDropBtnUstensils {
+                            /* border: 2px solid black; */
+                            /* padding: 2px; */
+
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 45px;
+                        }
+
+
+
+                                .divDropBtnIngredients i, .divDropBtnAppareils i, .divDropBtnUstensils i {
+                                    background-color: white;
+                                    height: 45px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    padding-right: 10px;
+                                }
+
+                                #dropdownBtn1, #dropdownBtn2, #dropdownBtn3 {
+                                    /* border: 2px solid black; */
+                                    /* margin: 5px; */
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    align-items: center;
+                                    width: 90%;
+                                    height: 100%;
+                                    cursor: pointer;
+                                    background-color: white;
+
+                                    padding-left: 10px;
+                                    font-family: Manrope, sans-serif;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                }
+
+
+
+
+                        .dropdown-content {
+                            /* border: 2px solid black; */
+                            
+                            
+                            width: 100%;
+                            height: 300px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            border-radius: 0 0 8px 8px;
+                        }
+
+
+
+                                .dropdown-content form {
+                                    /* border: 2px solid black; */
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    padding: 10px;
+                                    width: 100%;
+                                    /* margin-top: 5px;
+                                    margin-bottom: 5px; */
+                                    background-color: white;
+
+
+                                }
+
+
+                                        .dropdown-content #myIngredientInput, .dropdown-content #myAppareilInput, .dropdown-content #myUstensilInput {
+                                            border-left: 2px solid rgb(219, 219, 219);
+                                            border-top: 2px solid rgb(219, 219, 219);
+                                            border-bottom: 2px solid rgb(219, 219, 219);
+                                            /* margin-top: 5px;
+                                            margin-bottom: 5px; */
+                                            
+                                            width: 90%;
+                                            height: 50px;
+                                        }
+
+                                
+                                        .dropdown-content form i {
+                                            border-top: 2px solid rgb(219, 219, 219);
+                                            border-right: 2px solid rgb(219, 219, 219);
+                                            border-bottom: 2px solid rgb(219, 219, 219);
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            width: 10%;
+                                            font-size: 10px;
+                                            color: beige;
+
+                                        }
+
+                                        .rotate {
+                                            transform: rotate(180deg);
+                                        }
+
+
+                                            .dropdown-content form .fas.fa-search {
+                                                /* border: 2px solid black; */
+                                                height: 50px;
+                                                color: rgb(219, 219, 219);
+                                            }
+
+
+
+                                .dropdown-content #myDropdownContent {
+                                    /* border: 2px solid black; */
+                                
+                                    width: 100%;
+                                    height: 200px;
+                                    margin-bottom: 5px;
+                                    background-color: white;
+                                    max-height: 200px; /* Hauteur maximale de la div parente pour activer le défilement vertical */
+                                    overflow-y: auto; /* Défilement vertical */
+                                }
+
+
+
+                    
+                    
+                        .ingredient__selectione, .appareil__selectione, .ustensil__selectione {
+                            /* width: 80%; */
+                            /* height: 40px; */
+                            /* background-color: #FFD15B; */
+                            /* border-radius: 10px; */
+                            margin-bottom: 10px;
+
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 12px;
+                            font-family: Manrope, sans-serif;
+
+                        }
+
+                        .ingredient__selectione:hover, .appareil__selectione:hover, .ustensil__selectione:hover { 
+                            background-color: #FFD15B; 
+                            cursor: pointer;
+                        }
+
+
+                                .paragrapheFlitreIngredient, .paragrapheFlitreAppareil, .paragrapheFlitreUstensil {
+                                    margin-left: 5px;
+                                }
+
+
+                                .close-icon {
+                                    cursor: pointer;
+                                    margin-right: 5px;
+                                    font-size: 8px;
+                                }
+
+
+
+
+
+
+
+            .sectionTri__nbrDeRecette {
+                /* border: 2px solid black; */
+                margin: 5px;
+                width: 10%;
+            }
+
+
+    
+
+
+.sectionArticleRecette {
+    /* border: 2px solid black; */
+    /* margin: 5px; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+    margin: 10px 2px 50px 20px;
+    font-family: Manrope;
+}
+
+
+
+    .sectionArticleRecette__articleRecette {
+        /* border: 2px solid black; */
+        /* margin: 3px; */
+
+        background-color: white;
+        border-radius: 20px;
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+
+
+    }
+
+
+
+            .articleRecette__figureRecette {
+                /* border: 2px solid black; */
+                /* margin: 3px; */
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                border-radius: inherit;
+
+
+            }
+
+
+
+                    .figureRecette__divImgRecette {
+                        position: relative;
+                        width: 100%;
+                        height: 250px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: inherit;
+
+                    }
+
+
+
+                            .divImgRecette__img {
+                                  width: 100%;
+                                  height: 100%;
+                                  object-fit: cover;
+                                  border-radius: 20px 20px 0 0;
+                            }
+
+
+                            .divImgRecette__divTime {
+                                width: 70px;
+                                height: 20px;
+                                border-radius: 10px;
+                                background-color: #FFD15B;
+                                position: absolute;
+                                    top: 20px;
+                                    right: 20px;
+
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                            }
+
+
+                                    .divTime__time {
+                                        font-size: 12px;
+                                        
+                                    }
+
+
+
+
+                    .figureRecette__figcapRecette {
+                        /* border: 2px solid black; */
+                        width: 80%;
+                        margin: 40px 0 0 20px;
+                    }
+
+
+                        .figcapRecette__nomRecette {
+                            /* border: 2px solid black; */
+                            margin: 3px;
+                            font-family: 'Anton', sans-serif;
+                            font-size: 20px;
+                        }
+
+
+
+
+
+
+
+
+            .articleRecette__sectionRecette {
+                /* border: 2px solid black; */
+                margin: 40px 0 0 20px;
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+
+
+            }
+
+                .sectionRecette__titreH2 {
+                    /* border: 2px solid black; */
+                    margin: 3px 0 20px 3px;
+                    font-family: 'Manrope', sans-serif;
+                    letter-spacing: 1.08px;
+                    font-size: 12px;
+
+                }
+
+
+                .sectionRecette__paragrapheDetailRecette {
+                    /* border: 2px solid black; */
+                    margin: 3px;
+                    height: 130px;
+                    overflow: hidden; /* Cacher le texte qui dépasse */
+                    text-overflow: ellipsis; /* Ajouter les points de suspension */
+                    font-size: 13px;
+
+                }
+
+
+            .articleRecette__sectionIngredient {
+                /* border: 2px solid black; */
+                margin: 40px 0 0 20px;
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                
+
+            }
+
+                .sectionIngredient__titreH2 {
+                    /* border: 2px solid black; */
+                    margin: 3px;
+                    font-family: 'Manrope', sans-serif;
+                    letter-spacing: 1.08px;
+                    font-size: 12px;
+
+                }
+
+
+                .sectionIngredient__divArticleIngredient {
+                    /* border: 2px solid black; */
+                    margin: 3px;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr; /* Deux colonnes de largeur égale */
+                    gap: 25px;
+                    margin: 10px 2px 50px 2px;
+                }
+
+
+                    .divArticleIngredient__articleIngrdient {
+                        /* border: 2px solid black; */
+                        margin: 3px;
+                        display: flex;
+                        flex-direction: column;
+                        font-size: 13px;
+                    }
+
+
+                        .articleIngrdient__titreH3 {
+
+                        }
+
+                        .articleIngrdient__dosage {
+
+                        }
+
+
+.hide {
+    display: none;
+}
+
+        
+
+
