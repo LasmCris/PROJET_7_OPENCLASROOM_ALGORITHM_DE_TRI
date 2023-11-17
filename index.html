@@ -1,191 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="./Style/index.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./Style/index.css" />
     <title>Page d'accueil</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        
-        <figure class="header__figure">
-            <img class="figure__logo" src="/asset/Photos_logo_header/ohmyfood.png" alt="">
-        </figure>
-        
-        <div class="header__divSloganSite">
-            <h1 class="divSloganSite__slogan">CHERCHEZ PARMIS PLUS DE 1500 RECETTES </h1>
-            <p  class="divSloganSite__slogan">DU QUOTIDIEN SIMPLE ET DELICIEUSE</p>
-        </div>
-        
+      <figure class="header__figure">
+        <img
+          class="figure__logo"
+          src="/asset/Photos_logo_header/ohmyfood.png"
+          alt=""
+        />
+      </figure>
 
-        <section class="header__sectionRecherche">
+      <div class="header__divSloganSite">
+        <h1 class="divSloganSite__slogan">
+          CHERCHEZ PARMIS PLUS DE 1500 RECETTES
+        </h1>
+        <p class="divSloganSite__slogan">DU QUOTIDIEN SIMPLE ET DELICIEUSE</p>
+      </div>
 
-            <form class="sectionRecherche__formulaire">
-                <input class="formulaire__inputSearch" type="text" id="inputRecherche" placeholder="recherchez une recette, un ingredient">
-                
-                <label for="inputRecherche" class="formulaire__labelLoop">
-                    <i class="fas fa-search"></i>
-                </label>
-            </form>
+      <section class="header__sectionRecherche">
+        <form class="sectionRecherche__formulaire">
+          <input
+            class="formulaire__inputSearch"
+            type="text"
+            id="inputRecherche"
+            placeholder="recherchez une recette, un ingredient"
+          />
 
-        </section>
-        
-
+          <label for="inputRecherche" class="formulaire__labelLoop">
+            <i class="fas fa-search"></i>
+          </label>
+        </form>
+      </section>
     </header>
 
     <main>
-
-        <section class="sectionTri">
-
-            <div class="sectionTri__parametreDeTri">
-
-                <div class="dropdown">
-
-                    <div class="divDropBtnIngredients">
-                        <button id="dropdownBtn1" class="dropbtn">Ingredients</button>
-                        <i class="fa-solid fa-chevron-up"></i>
-                    </div>
-
-                    
-                    <div id="myDropdown1" class="dropdown-content" style="display: none">
-
-                        <form action="">
-                            <input type="text" placeholder="..." id="myIngredientInput">
-                            <i class="fas fa-search"></i>
-                        </form>
-
-                        <div id="myDropdownContent">
-
-                           
-                            
-                        </div>
-
-                         <!-- Les nouveaux éléments seront ajoutés ici. -->
-                            <template id="templateFiltreIngredients">
-
-                                <div class="ingredient__selectione">
-                                    <p class="paragrapheFlitreIngredient"></p>
-                                    <span class="close-icon">&#x2716;</span>
-                                </div>
-
-                            </template>
-
-                    </div>
-
-
-                </div>
-
-
-
-                <div class="dropdown">
-
-                    <div class="divDropBtnAppareils">
-                        <button id="dropdownBtn2" class="dropbtn">Appareils</button>
-                        <i class="fa-solid fa-chevron-up"></i>
-                    </div>
-
-                    
-                    <div id="myDropdown2" class="dropdown-content" style="display: none">
-
-                        <form action="">
-                            <input type="text" placeholder="..." id="myAppareilInput">
-                            <i class="fas fa-search"></i>
-                        </form>
-
-                        <div id="myDropdownContent">
-                            
-                        </div>
-                        <!-- Les nouveaux éléments seront ajoutés ici. -->
-                            <template id="templateFiltreAppareils">
-
-                                <div class="appareil__selectione">
-                                    <p class="paragrapheFlitreAppareil"></p>
-                                    <span class="close-icon">&#x2716;</span>
-                                </div>
-
-                            </template>
-
-                    </div>
-
-
-                </div>
-
-
-
-                <div class="dropdown">
-
-                    <div class="divDropBtnUstensils">
-                        <button id="dropdownBtn3" class="dropbtn">Ustensils</button>
-                        <i class="fa-solid fa-chevron-up"></i>
-                    </div>
-
-                    <div id="myDropdown3" class="dropdown-content" style="display: none">
-
-                        <form action="">
-                            <input type="text" placeholder="..." id="myUstensilInput">
-                            <i class="fas fa-search"></i>
-                        </form>
-
-                        <div id="myDropdownContent">
-                            
-                        </div>
-
-                        <!-- Les nouveaux éléments seront ajoutés ici. -->
-                            <template id="templateFiltreUstensils">
-
-                                <div class="ustensil__selectione">
-                                    <p class="paragrapheFlitreUstensil"></p>
-                                    <span class="close-icon">&#x2716;</span>
-                                </div>
-
-                            </template>
-
-                    </div>
-
-
-                </div>
-
-
-
+      <section class="sectionTri">
+        <div class="sectionTri__parametreDeTri">
+          <div class="dropdown">
+            <div class="divDropBtnIngredients">
+              <button id="dropdownBtn1" class="dropbtn">Ingredients</button>
+              <div>
+                <i class="fa-solid fa-chevron-up"></i>
+              </div>
             </div>
 
+            <div id="myDropdown1" class="dropdown-content" style="display: none">
+              <form action="">
+                <input type="text" placeholder="..." id="myIngredientInput" />
+                <i class="fas fa-search"></i>
+              </form>
 
+              <div class="myDropdown1__divIngredientsSelectionnés"></div>
+              <div id="myDropdownContent"></div>
 
+              <!-- Les nouveaux éléments seront ajoutés ici. -->
+              <template id="templateFiltreIngredients">
+                <div class="ingredient__selectione">
+                  <p class="paragrapheFlitreIngredient"></p>
+                  <span class="close-icon" style="display: none;">&#x2716;</span>
+                </div>
+              </template>
+            </div>
+          </div>
 
-            <div class="sectionTri__nbrDeRecette">
-
-                <p class="nbrDeRecette">(NBR recette)</p>
-
+          <div class="dropdown">
+            <div class="divDropBtnAppareils">
+              <button id="dropdownBtn2" class="dropbtn">Appareils</button>
+              <div>
+                <i class="fa-solid fa-chevron-up"></i>
+              </div>
             </div>
 
-        </section>
+            <div id="myDropdown2" class="dropdown-content" style="display: none">
+              <form action="">
+                <input type="text" placeholder="..." id="myAppareilInput" />
+                <i class="fas fa-search"></i>
+              </form>
 
+              <div class="myDropdown2__divAppareilsSelectionnés"></div>
 
-        <section class="sectionArticleRecette">
+              <div id="myDropdownContent"></div>
+              <!-- Les nouveaux éléments seront ajoutés ici. -->
+              <template id="templateFiltreAppareils">
+                <div class="appareil__selectione">
+                  <p class="paragrapheFlitreAppareil"></p>
+                  <span class="close-icon" style="display: none;">&#x2716;</span>
+                </div>
+              </template>
+            </div>
+          </div>
 
+          <div class="dropdown">
+            <div class="divDropBtnUstensils">
+              <button id="dropdownBtn3" class="dropbtn">Ustensils</button>
+              <div>
+                <i class="fa-solid fa-chevron-up"></i>
+              </div>
+            </div>
 
+            <div id="myDropdown3" class="dropdown-content" style="display: none">
+              <form action="">
+                <input type="text" placeholder="..." id="myUstensilInput" />
+                <i class="fas fa-search"></i>
+              </form>
 
-        </section>
+              <div class="myDropdown3__divUstensilsSelectionnés"></div>
+              <div id="myDropdownContent"></div>
 
+              <!-- Les nouveaux éléments seront ajoutés ici. -->
+              <template id="templateFiltreUstensils">
+                <div class="ustensil__selectione">
+                  <p class="paragrapheFlitreUstensil"></p>
+                  <span class="close-icon" style="display: none;">&#x2716;</span>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
 
+        <div class="sectionTri__nbrDeRecette">
+          <p class="nbrDeRecette">(NBR recette)</p>
+        </div>
+      </section>
 
+      <section class="sectionArticleRecette"></section>
     </main>
 
-
-    <script type="module" src="./data/recipes.js"> </script>
-    <script type="module" src="./script/index.js"> </script>
-    <script type="module" src="./script/optionSelect.js"> </script>
-    <script type="module" src="./script/algoSearch.js"> </script>
-</body>
+    <script type="module" src="./data/recipes.js"></script>
+    <script type="module" src="./script/index.js"></script>
+    <script type="module" src="./script/optionSelect.js"></script>
+    <script type="module" src="./script/algoSearch.js"></script>
+  </body>
 </html>
-
-
-
-

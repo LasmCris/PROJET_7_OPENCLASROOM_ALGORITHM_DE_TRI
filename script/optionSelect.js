@@ -3,100 +3,7 @@ import recipes from "/data/recipes.js";
 
 
 
-
-
-
-// Je Crée un tableau pour stocker les valeurs de la propriétés "appliance"
-const arrayDesAppareils = [];
-
-//Je parcoure le tableau recipes
-recipes.forEach((recipe) => {
-  const appareil = recipe.appliance;
-
-  //Je vérifie si l'appareils n'est pas déjà dans le tableau arrayDesAppareils
-  if (!arrayDesAppareils.includes(appareil)) {
-    arrayDesAppareils.push(appareil); // J'ajoute l'appareil au tableau "arrayDesAppareils"
-  }
-});
-
-
-// Maintenant, arrayDesAppareils contient toutes les appareils.
-console.log(arrayDesAppareils);
-
-
-// Fonction pour afficher les appareils dans le dropdown
-function displayAppareils(appareils) {
-    var dropdownContent = document.querySelector(
-      "#myDropdown2 #myDropdownContent"
-    );
-    var template = document.getElementById('templateFiltreAppareils');
-    dropdownContent.innerHTML = ''; // Réinitialiser le contenu du dropdown
-    // if (template) {
-      appareils.forEach((appareil) => {
-        var clone = template.content.cloneNode(true);
-        clone.querySelector(".paragrapheFlitreAppareil").textContent = appareil;
-        dropdownContent.appendChild(clone);
-      });
-    // } 
-    // else {
-    //   window.location.reload();
-    //   console.error("Le template n'est pas encore disponible dans le DOM.");
-    // }
-    
-}
-
-
-
-// Afficher ou masquer le dropdown
-// Initialisation de la variable d'état
-var dropdownAppareilsOpen = false;
-const chevron2 = document.querySelector(".divDropBtnAppareils i");
-var dropdownContent2 = document.getElementById("myDropdown2");
-document.getElementById("dropdownBtn2").addEventListener("click", function () {
-  
-  if (dropdownAppareilsOpen) {
-    dropdownContent2.style.display = "none";
-    chevron2.classList.remove("rotate");
-    dropdownAppareilsOpen = false;
-  } else {
-    dropdownContent2.style.display = "block";
-    chevron2.classList.add("rotate");
-    dropdownAppareilsOpen = true;
-    displayAppareils(arrayDesAppareils);
-  }
-});
-
-
-
-
-
-// Filtrer les éléments du dropdown en fonction de la saisie de l'utilisateur
-document.getElementById('myAppareilInput').addEventListener('input', function() {
-    var input, filter, div, items, txtValue, i;
-    input = document.getElementById('myAppareilInput');
-    filter = input.value.toUpperCase();
-    div = document.getElementById('myDropdownContent');
-    items = div.getElementsByTagName('div');
-    for (i = 0; i < items.length; i++) {
-        txtValue = items[i].querySelector('.paragrapheFlitreAppareil').textContent || items[i].querySelector('.paragrapheFlitreAppareil').innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            items[i].style.display = '';
-        } else {
-            items[i].style.display = 'none';
-        }
-    }
-});
-
-
-
-
-
-
-
 //***************************************************************************** */
-
-
-
 
 // Je crée un tableau pour stocker les valeurs uniques de "ingredient"
 const arrayDesIngredients = [];
@@ -120,25 +27,66 @@ recipes.forEach((recipe) => {
 console.log(arrayDesIngredients);
 
 
-
-
 // Fonction pour afficher les ingredients dans le dropdown
-function displayIngredients (ingredient) {
+// Déclarer un tableau pour stocker les textes des paragraphes d'ingrédients tagés
+export var ingredientsTagés = [];
+
+function displayIngredients(ingredients) {
   var dropdownContent = document.querySelector("#myDropdown1 #myDropdownContent");
   var template = document.getElementById("templateFiltreIngredients");
+  var selectedIngredientsDiv = document.querySelector(".myDropdown1__divIngredientsSelectionnés");
+
   dropdownContent.innerHTML = ""; // Réinitialiser le contenu du dropdown
-  // if (template) {
-  ingredient.forEach((ingredient) => {
+
+  ingredients.forEach((ingredient) => {
     var clone = template.content.cloneNode(true);
-    clone.querySelector(".paragrapheFlitreIngredient").textContent = ingredient;
+    var templateParagraph = clone.querySelector(".paragrapheFlitreIngredient");
+
+    templateParagraph.textContent = ingredient;
+
+    // Ajouter un gestionnaire d'événements au paragraphe cloné
+    templateParagraph.addEventListener("click", function () {
+      // Cloner l'élément cliqué dans la div de classe .myDropdown1__divIngredientsSelectionnés
+      var selectedIngredientClone = templateParagraph.cloneNode(true);
+
+      // Ajouter une icône de fermeture à l'élément cloné
+      var closeIcon = document.createElement("span");
+      closeIcon.className = "close-icon";
+      closeIcon.textContent = "\u2716"; // Symbole de fermeture (X)
+      closeIcon.style.display = "inline";
+
+      // Ajouter un gestionnaire d'événements à l'icône de fermeture
+      closeIcon.addEventListener("click", function () {
+        // Retirer le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
+        selectedIngredientsDiv.removeChild(selectedIngredientClone);
+
+        // Retirer le texte du paragraphe du tableau ingredientsTagés
+        ingredientsTagés = ingredientsTagés.filter(texte => texte !== templateParagraph.textContent);
+        console.log(ingredientsTagés);
+      });
+
+      // Ajouter l'icône de fermeture à l'élément cloné
+      selectedIngredientClone.appendChild(closeIcon);
+
+      // Modifier la couleur de fond en utilisant le code hexadécimal
+      selectedIngredientClone.style.backgroundColor = "#FFD15B";
+
+      // Ajouter l'élément cloné à la div .myDropdown1__divIngredientsSelectionnés
+      selectedIngredientsDiv.appendChild(selectedIngredientClone);
+
+      // Ajouter le texte du paragraphe au tableau ingredientsTagés
+      ingredientsTagés.push(templateParagraph.textContent);
+      console.log(ingredientsTagés);
+    });
+
     dropdownContent.appendChild(clone);
   });
-  // }
-  // else {
-  //   window.location.reload();
-  //   console.error("Le template n'est pas encore disponible dans le DOM.");
-  // }
 }
+
+
+
+
+
 
 
 
@@ -167,20 +115,168 @@ document.getElementById("dropdownBtn1").addEventListener("click", function () {
 
 // Filtrer les éléments du dropdown en fonction de la saisie de l'utilisateur
 document.getElementById('myIngredientInput').addEventListener('input', function() {
-    var input, filter, div, items, txtValue, i;
-    input = document.getElementById("myIngredientInput");
-    filter = input.value.toUpperCase();
-    div = document.getElementById('myDropdownContent');
-    items = div.getElementsByTagName('div');
-    for (i = 0; i < items.length; i++) {
-        txtValue = items[i].querySelector('.paragrapheFlitreIngredient').textContent || items[i].querySelector('.paragrapheFlitreIngredient').innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            items[i].style.display = '';
+    let input1, filter1, div1, items1, txtValue1, i1;
+    input1 = document.getElementById("myIngredientInput");
+    filter1 = input1.value.toUpperCase();
+    div1 = document.querySelector("#myDropdown1 #myDropdownContent");
+    items1 = div1.getElementsByTagName('div');
+
+    // Utiliser arrayDesAppareils comme base de filtrage
+    for (i1 = 0; i1 < arrayDesIngredients.length; i1++) {
+      txtValue1 = arrayDesIngredients[i1];
+      let currentItem1 = items1[i1];
+
+      // Vérifier si l'élément existe avant d'accéder à sa propriété style
+      if (currentItem1) {
+        if (txtValue1.toUpperCase().indexOf(filter1) > -1) {
+          // Afficher l'élément si le filtre correspond
+          currentItem1.style.display = "";
         } else {
-            items[i].style.display = 'none';
+          // Masquer l'élément sinon
+          currentItem1.style.display = "none";
+        }
+      }
+    }
+});
+
+
+
+
+//***************************************************************************** */
+
+
+
+
+// Je Crée un tableau pour stocker les valeurs de la propriétés "appliance"
+const arrayDesAppareils = [];
+
+//Je parcoure le tableau recipes
+recipes.forEach((recipe) => {
+  const appareil = recipe.appliance;
+
+  //Je vérifie si l'appareils n'est pas déjà dans le tableau arrayDesAppareils
+  if (!arrayDesAppareils.includes(appareil)) {
+    arrayDesAppareils.push(appareil); // J'ajoute l'appareil au tableau "arrayDesAppareils"
+  }
+});
+
+
+// Maintenant, arrayDesAppareils contient toutes les appareils.
+console.log(arrayDesAppareils);
+
+
+// Fonction pour afficher les appareils dans le dropdown
+// Déclarer un tableau pour stocker les textes des paragraphes d'appareils tagés
+export var appareilsTagés = [];
+
+function displayAppareils(appareils) {
+  var dropdownContent = document.querySelector("#myDropdown2 #myDropdownContent");
+  var template = document.getElementById("templateFiltreAppareils");
+  var selectedAppareilsDiv = document.querySelector(".myDropdown2__divAppareilsSelectionnés");
+
+  dropdownContent.innerHTML = ""; // Réinitialiser le contenu du dropdown
+
+  appareils.forEach((appareil) => {
+    var clone = template.content.cloneNode(true);
+    var templateParagraph = clone.querySelector(".paragrapheFlitreAppareil");
+
+    templateParagraph.textContent = appareil;
+
+    // Ajouter un gestionnaire d'événements au paragraphe cloné
+    templateParagraph.addEventListener("click", function () {
+      // Cloner l'élément cliqué dans la div de classe .myDropdown2__divAppareilsSelectionnés
+      var selectedAppareilClone = templateParagraph.cloneNode(true);
+
+      // Ajouter une icône de fermeture à l'élément cloné
+      var closeIcon = document.createElement("span");
+      closeIcon.className = "close-icon";
+      closeIcon.textContent = "\u2716"; // Symbole de fermeture (X)
+      closeIcon.style.display = "inline";
+
+      // Ajouter un gestionnaire d'événements à l'icône de fermeture
+      closeIcon.addEventListener("click", function () {
+        // Retirer le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
+        selectedAppareilsDiv.removeChild(selectedAppareilClone);
+
+        // Retirer le texte du paragraphe du tableau appareilsTagés
+        appareilsTagés = appareilsTagés.filter(texte => texte !== templateParagraph.textContent);
+        console.log(appareilsTagés);
+      });
+
+      // Ajouter l'icône de fermeture à l'élément cloné
+      selectedAppareilClone.appendChild(closeIcon);
+
+      // Modifier la couleur de fond en utilisant le code hexadécimal
+      selectedAppareilClone.style.backgroundColor = "#FFD15B";
+
+      // Ajouter l'élément cloné à la div .myDropdown2__divAppareilsSelectionnés
+      selectedAppareilsDiv.appendChild(selectedAppareilClone);
+
+      // Ajouter le texte du paragraphe au tableau appareilsTagés
+      appareilsTagés.push(templateParagraph.textContent);
+
+      console.log(appareilsTagés);
+    });
+
+    dropdownContent.appendChild(clone);
+  });
+}
+
+
+
+
+
+// Afficher ou masquer le dropdown
+// Initialisation de la variable d'état
+var dropdownAppareilsOpen = false;
+const chevron2 = document.querySelector(".divDropBtnAppareils i");
+var dropdownContent2 = document.getElementById("myDropdown2");
+document.getElementById("dropdownBtn2").addEventListener("click", function () {
+  
+  if (dropdownAppareilsOpen) {
+    dropdownContent2.style.display = "none";
+    chevron2.classList.remove("rotate");
+    dropdownAppareilsOpen = false;
+  } else {
+    dropdownContent2.style.display = "block";
+    chevron2.classList.add("rotate");
+    dropdownAppareilsOpen = true;
+    displayAppareils(arrayDesAppareils);
+  }
+});
+
+
+
+
+// Filtrer les éléments du dropdown en fonction de la saisie de l'utilisateur
+document.getElementById('myAppareilInput').addEventListener('input', function() {
+    let input2, filter2, div2, items2, txtValue2, i2;
+    input2 = document.getElementById('myAppareilInput');
+    filter2 = input2.value.toUpperCase();
+    div2 = document.querySelector("#myDropdown2 #myDropdownContent");
+    items2 = div2.getElementsByTagName('div');
+
+    // Utiliser arrayDesAppareils comme base de filtrage
+    for (i2 = 0; i2 < arrayDesAppareils.length; i2++) {
+        txtValue2 = arrayDesAppareils[i2];
+        let currentItem2 = items2[i2];
+
+        // Vérifier si l'élément existe avant d'accéder à sa propriété style
+        if (currentItem2) {
+            if (txtValue2.toUpperCase().indexOf(filter2) > -1) {
+                // Afficher l'élément si le filtre correspond
+                currentItem2.style.display = '';
+            } else {
+                // Masquer l'élément sinon
+                currentItem2.style.display = 'none';
+            }
         }
     }
 });
+
+
+
+
 
 
 
@@ -216,24 +312,66 @@ console.log(arrayDesUstensils);
 
 
 // Fonction pour afficher les ingredients dans le dropdown
-function displayUstensils (Ustensils) {
-  var dropdownContent = document.querySelector(
-    "#myDropdown3 #myDropdownContent"
-  );
+// Déclarer un tableau pour stocker les textes des paragraphes d'ustensils tagés
+export var ustensilsTagés = [];
+
+function displayUstensils(Ustensils) {
+  var dropdownContent = document.querySelector("#myDropdown3 #myDropdownContent");
   var template = document.getElementById("templateFiltreUstensils");
+  var selectedUstensilsDiv = document.querySelector(".myDropdown3__divUstensilsSelectionnés");
+
   dropdownContent.innerHTML = ""; // Réinitialiser le contenu du dropdown
-  // if (template) {
+
   Ustensils.forEach((Ustensil) => {
     var clone = template.content.cloneNode(true);
-    clone.querySelector(".paragrapheFlitreUstensil").textContent = Ustensil;
+    var templateParagraph = clone.querySelector(".paragrapheFlitreUstensil");
+
+    templateParagraph.textContent = Ustensil;
+
+    // Ajouter un gestionnaire d'événements au paragraphe cloné
+    templateParagraph.addEventListener("click", function () {
+      // Cloner l'élément cliqué dans la div de classe .myDropdown3__divUstensilsSelectionnés
+      var selectedUstensilClone = templateParagraph.cloneNode(true);
+
+      // Ajouter une icône de fermeture à l'élément cloné
+      var closeIcon = document.createElement("span");
+      closeIcon.className = "close-icon";
+      closeIcon.textContent = "\u2716"; // Symbole de fermeture (X)
+      closeIcon.style.display = "inline";
+
+      // Ajouter un gestionnaire d'événements à l'icône de fermeture
+      closeIcon.addEventListener("click", function () {
+        // Retirer le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
+        selectedUstensilsDiv.removeChild(selectedUstensilClone);
+
+        // Retirer le texte du paragraphe du tableau ustensilsTagés
+        ustensilsTagés = ustensilsTagés.filter(texte => texte !== templateParagraph.textContent);
+        console.log(ustensilsTagés);
+      });
+
+      // Ajouter l'icône de fermeture à l'élément cloné
+      selectedUstensilClone.appendChild(closeIcon);
+
+      // Ajouter l'élément cloné à la div .myDropdown3__divUstensilsSelectionnés
+      selectedUstensilsDiv.appendChild(selectedUstensilClone);
+
+      // Ajouter le texte du paragraphe au tableau ustensilsTagés
+      ustensilsTagés.push(templateParagraph.textContent);
+
+      // Modifier la couleur de fond en utilisant le code hexadécimal
+      selectedUstensilClone.style.backgroundColor = "#FFD15B";
+
+      console.log(ustensilsTagés);
+    });
+
     dropdownContent.appendChild(clone);
   });
-  // }
-  // else {
-  //   window.location.reload();
-  //   console.error("Le template n'est pas encore disponible dans le DOM.");
-  // }
 }
+
+
+
+
+
 
 
 
@@ -261,20 +399,89 @@ document.getElementById("dropdownBtn3").addEventListener("click", function () {
 
 
 // Filtrer les éléments du dropdown en fonction de la saisie de l'utilisateur
-document.getElementById('myIngredientInput').addEventListener('input', function() {
-    var input, filter, div, items, txtValue, i;
-    input = document.getElementById("myIngredientInput");
-    filter = input.value.toUpperCase();
-    div = document.getElementById('myDropdownContent');
-    items = div.getElementsByTagName('div');
-    for (i = 0; i < items.length; i++) {
-        txtValue = items[i].querySelector('.paragrapheFlitreIngredient').textContent || items[i].querySelector('.paragrapheFlitreIngredient').innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            items[i].style.display = '';
+document.getElementById('myUstensilInput').addEventListener('input', function() {
+    let input3, filter3, div3, items3, txtValue3, i3;
+    input3 = document.getElementById("myUstensilInput");
+    filter3 = input3.value.toUpperCase();
+    div3 = document.querySelector("#myDropdown3 #myDropdownContent");
+    items3 = div3.getElementsByTagName('div');
+
+    // Utiliser arrayDesAppareils comme base de filtrage
+    for (i3 = 0; i3 < arrayDesUstensils.length; i3++) {
+      txtValue3 = arrayDesUstensils[i3];
+      let currentItem3 = items3[i3];
+
+      // Vérifier si l'élément existe avant d'accéder à sa propriété style
+      if (currentItem3) {
+        if (txtValue3.toUpperCase().indexOf(filter3) > -1) {
+          // Afficher l'élément si le filtre correspond
+          currentItem3.style.display = "";
         } else {
-            items[i].style.display = 'none';
+          // Masquer l'élément sinon
+          currentItem3.style.display = "none";
         }
+      }
     }
+});
+
+
+
+
+//*********** FONCTIONNALITE DE COORDINATION DE FERMETURE DES DROPDOWN */
+
+// Fonction pour fermer toutes les dropdowns sauf celle spécifiée
+function fermerToutesLesDropdowns(saufDropdown) {
+  if (dropdownContent1 !== saufDropdown) {
+    dropdownContent1.style.display = "none";
+    chevron1.classList.remove("rotate");
+  }
+
+  if (dropdownContent2 !== saufDropdown) {
+    dropdownContent2.style.display = "none";
+    chevron2.classList.remove("rotate");
+  }
+
+  if (dropdownContent3 !== saufDropdown) {
+    dropdownContent3.style.display = "none";
+    chevron3.classList.remove("rotate");
+  }
+}
+
+// Écouteurs d'événements pour les boutons de dropdown
+document.getElementById("dropdownBtn1").addEventListener("click", function () {
+  if (dropdownContent1.style.display === "block") {
+    dropdownContent1.style.display = "none";
+    chevron1.classList.remove("rotate");
+  } else {
+    fermerToutesLesDropdowns(dropdownContent1);
+    dropdownContent1.style.display = "block";
+    chevron1.classList.add("rotate");
+    displayIngredients(arrayDesIngredients);
+  }
+});
+
+document.getElementById("dropdownBtn2").addEventListener("click", function () {
+  if (dropdownContent2.style.display === "block") {
+    dropdownContent2.style.display = "none";
+    chevron2.classList.remove("rotate");
+  } else {
+    fermerToutesLesDropdowns(dropdownContent2);
+    dropdownContent2.style.display = "block";
+    chevron2.classList.add("rotate");
+    displayAppareils(arrayDesAppareils);
+  }
+});
+
+document.getElementById("dropdownBtn3").addEventListener("click", function () {
+  if (dropdownContent3.style.display === "block") {
+    dropdownContent3.style.display = "none";
+    chevron3.classList.remove("rotate");
+  } else {
+    fermerToutesLesDropdowns(dropdownContent3);
+    dropdownContent3.style.display = "block";
+    chevron3.classList.add("rotate");
+    displayUstensils(arrayDesUstensils);
+  }
 });
 
 
@@ -284,237 +491,18 @@ document.getElementById('myIngredientInput').addEventListener('input', function(
 
 
 
-// J'obtiens les références des éléments <select> dans le HTML
-const ingredientSelect = document.querySelector("#ingredient");
-const appareilSelect = document.querySelector("#appareil");
-const ustensilSelect = document.querySelector("#ustensil");
 
-// // J'obtiens les références des templates
-// const templateFiltreIngredients = document.getElementById(
-//   "templateFiltreIngredients"
-// );
-// const templateFiltreAppareils = document.getElementById(
-//   "templateFiltreAppareils"
-// );
-// const templateFiltreUstensils = document.getElementById(
-//   "templateFiltreUstensils"
-// );
 
-// // Je remplis les options des balises <select> avec les valeurs des tableaux
-// // Pour les ingrédients
-// uniqueIngredients.forEach((ingredient) => {
-//   const option = document.createElement("option");
-//   option.value = ingredient;
-//   option.textContent = ingredient;
-//   ingredientSelect.appendChild(option);
-// });
 
-// // Pour les appareils
-// uniqueAppliances.forEach((appareil) => {
-//   const option = document.createElement("option");
-//   option.value = appareil;
-//   option.textContent = appareil;
-//   appareilSelect.appendChild(option);
-// });
 
-// // Pour les ustensiles
-// uniqueUstensils.forEach((ustensil) => {
-//   const option = document.createElement("option");
-//   option.value = ustensil;
-//   option.textContent = ustensil;
-//   ustensilSelect.appendChild(option);
-// });
 
-// // Ajout des écouteurs d'événements
-// // pour gérer les sélections et les ajouts dynamiques d'éléments basés sur les sélections.
 
-// //################################ POUR LES INGREDIENTS #####################################
 
-// // J'obtient la référence du conteneur où j'afficherais les sélections
-// const selectionContainer = document.querySelector(
-//   ".parametreDeTri__ingredients"
-// );
 
-// // Je crée un tableau pour stocker les valeurs sélectionnées
-// export const selectedIngredientValues = [];
 
-// // J'ajoute un gestionnaire d'événement "change" à la balise <select>
-// ingredientSelect.addEventListener("change", function () {
-//   // Je récupére la valeur de l'option sélectionnée
-//   const selectedValue = ingredientSelect.value;
 
-//   // Si une valeur est sélectionnée et n'est pas déjà dans le tableau selectedIngredientValues
-//   if (selectedValue && !selectedIngredientValues.includes(selectedValue)) {
-//     // Je clonne le template
-//     const newSelection = templateFiltreIngredients.content.cloneNode(true);
 
-//     // Je recupère la référence du paragraphe dans le clone
-//     const paragraph = newSelection.querySelector(".paragrapheFlitreIngredient");
 
-//     // J'affiche la valeur de l'option sélectionnée dans le paragraphe
-//     paragraph.textContent = selectedValue;
-
-//     // J'ajoute le clone au conteneur
-//     selectionContainer.appendChild(newSelection);
-
-//     // J'ajoute la valeur sélectionnée au tableau selectedIngredientValues
-//     selectedIngredientValues.push(selectedValue);
-//   }
-// });
-
-// //FERMETURE DES INGREDIENTS SELECTIONNÉ
-// // J'obtient la référence du conteneur où J'afficherais les sélections
-// selectionContainer;
-
-// // J'ajoute un gestionnaire d'événement "click" au conteneur parent
-// selectionContainer.addEventListener("click", (event) => {
-//   if (event.target.classList.contains("close-icon")) {
-//     // Si l'élément cliqué a la classe "close-icon"
-//     // Je récupére le parent (le template à supprimer)
-//     const templateToRemove = event.target.closest(".ingredient__selectione");
-
-//     if (templateToRemove) {
-//       // Je supprime le template du conteneur
-//       selectionContainer.removeChild(templateToRemove);
-
-//       // Je supprime également la valeur correspondante du tableau selectedIngredientValues
-//       const index = Array.from(templateToRemove.parentNode.children).indexOf(
-//         templateToRemove
-//       );
-//       selectedIngredientValues.splice(index, 1);
-//     }
-//   }
-// });
-
-// //################################ POUR LES APPAREIL #####################################
-
-// // J'obtient la référence du conteneur où J'afficherais les sélections
-// const selectionContainerAppareil = document.querySelector(
-//   ".parametreDeTri__appareils"
-// );
-
-// // Je cree un tableau pour stocker les valeurs sélectionnées
-// export const selectedAppareilValues = [];
-
-// // J'ajoute un gestionnaire d'événement "change" à la balise <select>
-// appareilSelect.addEventListener("change", function () {
-//   // Je récupère la valeur de l'option sélectionnée
-//   const selectedAppareilValue = appareilSelect.value;
-
-//   // Si une valeur est sélectionnée et n'est pas déjà dans le tableau selectedIngredientValues
-//   if (
-//     selectedAppareilValue &&
-//     !selectedAppareilValues.includes(selectedAppareilValue)
-//   ) {
-//     // Je clonne le template
-//     const newSelection2 = templateFiltreAppareils.content.cloneNode(true);
-
-//     // Je récupère la référence du paragraphe dans le clone
-//     const paragraph = newSelection2.querySelector(".paragrapheFlitreAppareil");
-
-//     // J'affiche la valeur de l'option sélectionnée dans le paragraphe
-//     paragraph.textContent = selectedAppareilValue;
-
-//     // J'ajoute le clone au conteneur
-//     selectionContainerAppareil.appendChild(newSelection2);
-
-//     // J'ajoute la valeur sélectionnée au tableau selectedIngredientValues
-//     selectedAppareilValues.push(selectedAppareilValue);
-//   }
-// });
-
-// //FERMETURE DES APPAREILS SELECTIONNÉ
-// // J'obtient la référence du conteneur où J'afficherais les sélections
-// selectionContainerAppareil;
-
-// //DELEGATION D'EVENNEMENT
-// // J'ajoute un gestionnaire d'événement "click" au conteneur parent
-// selectionContainerAppareil.addEventListener("click", (event) => {
-//   if (event.target.classList.contains("close-icon")) {
-//     // Si l'élément cliqué a la classe "close-icon"
-//     // Je récupère le parent (le template à supprimer)
-//     const templateToRemove = event.target.closest(".appareil__selectione");
-
-//     if (templateToRemove) {
-//       // Je supprime le template du conteneur
-//       selectionContainerAppareil.removeChild(templateToRemove);
-
-//       // Je supprime également la valeur correspondante du tableau selectedIngredientValues
-//       const index = Array.from(templateToRemove.parentNode.children).indexOf(
-//         templateToRemove
-//       );
-//       selectedAppareilValues.splice(index, 1);
-//     }
-//   }
-// });
-
-// //################################ POUR LES USTENSILS #####################################
-
-// // J'obtient la référence du conteneur où J'afficherais les sélections
-// const selectionContainerUstensils = document.querySelector(
-//   ".parametreDeTri__ustensils"
-// );
-
-// // Je crée un tableau pour stocker les valeurs sélectionnées, avec le mot clés export
-// // pour pouvoir l'exporter dans un autre module js
-// export const selectedUstensilValues = [];
-
-// // J'ajoute un gestionnaire d'événement "change" à la balise <select>
-// ustensilSelect.addEventListener("change", function () {
-//   // Je récupère la valeur de l'option sélectionnée
-//   const selectedUstensilValue = ustensilSelect.value;
-
-//   // Si une valeur est sélectionnée et n'est pas déjà dans le tableau selectedIngredientValues
-//   if (
-//     selectedUstensilValue &&
-//     !selectedUstensilValues.includes(selectedUstensilValue)
-//   ) {
-//     // Je clonne le template
-//     const newSelection3 = templateFiltreUstensils.content.cloneNode(true);
-
-//     // Je récupère la référence du paragraphe dans le clone
-//     const paragraph = newSelection3.querySelector(".paragrapheFlitreUstensil");
-
-//     // J'affiche la valeur de l'option sélectionnée dans le paragraphe
-//     paragraph.textContent = selectedUstensilValue;
-
-//     // J'ajoute le clone au conteneur
-//     selectionContainerUstensils.appendChild(newSelection3);
-
-//     // J'ajoute la valeur sélectionnée au tableau selectedIngredientValues
-//     selectedUstensilValues.push(selectedUstensilValue);
-//   }
-// });
-
-// //FERMETURE DES INGREDIENTS SELECTIONNÉ
-// // J'obtient la référence du conteneur où J'afficherais les sélections
-// selectionContainerUstensils;
-
-// // J'ajoute un gestionnaire d'événement "click" au conteneur parent
-// selectionContainerUstensils.addEventListener("click", (event) => {
-//   if (event.target.classList.contains("close-icon")) {
-//     // Si l'élément cliqué a la classe "close-icon"
-//     // Je récupère le parent (le template à supprimer)
-//     const templateToRemove = event.target.closest(".ustensil__selectione");
-
-//     if (templateToRemove) {
-//       // Je supprime le template du conteneur
-//       selectionContainerUstensils.removeChild(templateToRemove);
-
-//       // Je supprime également la valeur correspondante du tableau selectedIngredientValues
-//       const index = Array.from(templateToRemove.parentNode.children).indexOf(
-//         templateToRemove
-//       );
-//       selectedUstensilValues.splice(index, 1);
-//     }
-//   }
-// });
-
-// export default {
-//   selectedIngredientValues,
-//   selectedUstensilValues,
-//   selectedAppareilValues,
-// };
 
 
 
