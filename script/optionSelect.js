@@ -61,7 +61,7 @@ function displayIngredients(ingredients) {
         selectedIngredientsDiv.removeChild(selectedIngredientClone);
 
         // Retirer le texte du paragraphe du tableau ingredientsTagés
-        ingredientsTagés = ingredientsTagés.filter(texte => texte !== templateParagraph.textContent);
+        ingredientsTagés = ingredientsTagés.filter(texte => texte !== ingredient);
         console.log(ingredientsTagés);
       });
 
@@ -75,7 +75,7 @@ function displayIngredients(ingredients) {
       selectedIngredientsDiv.appendChild(selectedIngredientClone);
 
       // Ajouter le texte du paragraphe au tableau ingredientsTagés
-      ingredientsTagés.push(templateParagraph.textContent);
+      ingredientsTagés.push(ingredient);
       console.log(ingredientsTagés);
     });
 

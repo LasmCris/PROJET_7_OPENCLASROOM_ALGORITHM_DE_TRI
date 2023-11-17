@@ -1,5 +1,12 @@
 // J'importe la variable `recipes` depuis le fichier de données
 import recipes from "/data/recipes.js";
+import {
+  ingredientsTagés,
+  ustensilsTagés,
+  appareilsTagés,
+} from "./optionSelect.js";
+
+import searchRecipes from "./algoSearch.js";
 
 // J'obtiens ainsi la section parent où les articles de recette seront générés
 const sectionArticleRecette = document.querySelector(".sectionArticleRecette");
@@ -116,6 +123,44 @@ if (Array.isArray(recipes) && recipes.length > 0) {
   // ICI je Gére le cas où `recipes` n'est pas défini ou vide
   // Soit afficher un message d'erreur soit ne rien faire.
 }
+
+
+// Sélecteur DOM de la barre de recherche
+const searchInput = document.querySelector(".formulaire__inputSearch");
+
+// // Sélecteur DOM de la section des articles de recette
+// const sectionArticleRecette = document.querySelector(".sectionArticleRecette");
+
+
+// Écouteur d'événements pour la saisie dans la barre de recherche
+searchInput.addEventListener("input", function () {
+  const input = searchInput.value.toLowerCase();
+
+  // Vérifier si la longueur de la requête est supérieure ou égale à 3 caractères
+  if (input.length >= 3) {
+    const filteredRecipes = searchRecipes(
+      input,
+      ingredientsTagés,
+      ustensilsTagés,
+      appareilsTagés
+    );
+    // Effacer la section avant d'ajouter les nouvelles recettes
+    sectionArticleRecette.innerHTML = "";
+
+    // Générer et ajouter dynamiquement les articles de recette
+    filteredRecipes.forEach((recipe) => {
+      const recipeArticle = generateRecipeArticle(recipe);
+      sectionArticleRecette.appendChild(recipeArticle);
+    });
+  } else {
+    // Si la longueur de la requête est inférieure à 3 caractères, réafficher tous les articles de recette
+    sectionArticleRecette.innerHTML = "";
+    recipes.forEach((recipe) => {
+      const recipeArticle = generateRecipeArticle(recipe);
+      sectionArticleRecette.appendChild(recipeArticle);
+    });
+  }
+});
 
 
 export default generateRecipeArticle;
