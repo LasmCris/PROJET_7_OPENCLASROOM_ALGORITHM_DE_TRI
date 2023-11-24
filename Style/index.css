@@ -1,579 +1,586 @@
 * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font-family: inherit;
-    vertical-align: baseline;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  /* font-family: Manrope, sans-serif; */
 }
-
 
 body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
+header {
+  /* border: 2px solid black; */
+  /* margin: 5px; */
+  height: 525px;
+  display: flex;
+  flex-direction: column;
 
+  background-image: url("/asset/Photos_logo_header/lampos-aritonang-24gR_9lCdes-unsplash\ 1.png");
+  background-size: cover; /* j'ajuste la taille de l'image pour qu'elle couvre entièrement le header */
+  background-position: center;
+  background-repeat: no-repeat;
+  /* j'ajoute un degradé de couleur en cas d'echec de chargement de la page */
+  background-color: #f0f0f0;
+}
 
-        header {
-            /* border: 2px solid black; */
-            /* margin: 5px; */
-            height: 525px;
-            display: flex;
-            flex-direction: column;
+.header__figure {
+  /* border: 2px solid white; */
+  width: 193px;
+  margin-left: 20px;
+  padding: 2px;
+  margin-bottom: 150px;
+}
 
+.figure__logo {
+  /* border: 2px solid white; */
+  width: 100%;
+}
 
-            background-image: url("/asset/Photos_logo_header/lampos-aritonang-24gR_9lCdes-unsplash\ 1.png");
-            background-size: cover; /* j'ajuste la taille de l'image pour qu'elle couvre entièrement le header */
-            background-position: center;
-            background-repeat: no-repeat;
-            /* j'ajoute un degradé de couleur en cas d'echec de chargement de la page */
-            background-color: #f0f0f0;
-        }
+.header__divSloganSite {
+  /* border: 2px solid white; */
+  color: #ffd15b;
+  margin-bottom: 40px;
+}
 
+.divSloganSite__slogan {
+  /* border: 2px solid white; */
+  text-align: center;
+  font-family: Anton;
+  font-size: 30px;
+}
 
+.header__sectionRecherche {
+  /* border: 2px solid #ffffff; */
+  height: 55px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-            .header__figure {
-                /* border: 2px solid white; */
-                width: 193px;
-                margin-left: 20px;
-                padding: 2px;
-                margin-bottom: 150px;
+.sectionRecherche__formulaire {
+  /* border: 2px solid #ffffff; */
+  background-color: white;
+  height: 100%;
+  width: 50%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.formulaire__inputSearch {
+  text-decoration: none;
+  width: 90%;
+  height: 100%;
+  border-radius: 10px;
+  padding-left: 10px;
+}
 
-            }
+::placeholder {
+  font-size: 16px;
+}
 
-                .figure__logo {
-                    /* border: 2px solid white; */
-                    width: 100%;
+.formulaire__inputSearch:focus {
+  border-color: #f0f0f0;
+}
 
-                }
+.formulaire__labelLoop {
+  cursor: pointer;
+  width: 8%;
+  height: 88%;
+  border-radius: 10px;
+  /* border: 2px solid #ffffff; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
 
+.fas.fa-search {
+  color: white;
+}
 
-
-
-
-
-
-            .header__divSloganSite{
-                /* border: 2px solid white; */
-                color: #FFD15B;
-                margin-bottom: 40px;
-
-            }
-
-
-                .divSloganSite__slogan {
-                    /* border: 2px solid white; */
-                    text-align: center;
-                    font-family: Anton;
-                    font-size: 30px;
-
-                }
-
-
-
-
-            .header__sectionRecherche {
-                /* border: 2px solid #ffffff; */
-                height: 55px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-
-            }
-
-                    .sectionRecherche__formulaire {
-                        /* border: 2px solid #ffffff; */
-                        background-color: white;
-                        height: 100%;
-                        width: 50%;
-                        border-radius: 10px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                            
-                    }
-
-
-                        .formulaire__inputSearch {
-                            text-decoration: none;
-                            width: 90%;
-                            height: 100%;
-                            border-radius: 10px;
-                            padding-left: 10px;
-                        
-                        }
-
-                            ::placeholder {
-                                font-size: 16px;
-                            }
-
-
-
-                        .formulaire__inputSearch:focus {
-                            border-color: #f0f0f0;
-                        }
-
-
-                        .formulaire__labelLoop {
-                            cursor: pointer;
-                            width: 8%;
-                            height: 88%;
-                            border-radius: 10px;
-                            /* border: 2px solid #ffffff; */
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: black;
-
-                        }
-
-
-                            .fas.fa-search {
-                                color: white;
-                            }
-
-
-
-
-
-                        
-
-
-
-
-    main {
-        /* border: 2px solid black;
+main {
+  /* border: 2px solid black;
         margin: 5px; */
-        background-color: rgb(247, 244, 244);
+  background-color: rgb(247, 244, 244);
+  position: relative;
+}
 
-    }
+.sectionTri {
+  /* border: 2px solid black; */
+  margin: 5px;
+  margin-top: 20px;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  z-index: 1000000;
+}
 
+.sectionTri__parametreDeTri {
+  /* border: 2px solid black; */
+  margin: 5px;
+  width: 90%;
 
-        .sectionTri {
-            /* border: 2px solid black; */
-            margin: 5px;
-            margin-top: 20px;
-            display: flex;
+  display: flex;
+}
 
-        }
-
-
-            .sectionTri__parametreDeTri {
-                /* border: 2px solid black; */
-                margin: 5px;
-                width: 90%;
-
-                display: flex;
-
-            }
-
-
-                        .sectionTri__parametreDeTri .dropdown {
-                            /* border: 2px solid black;
+.sectionTri__parametreDeTri .dropdown {
+  /* border: 2px solid black;
                             margin: 5px; */
-                            width: 20%;
-                            margin-right: 40px;
+  width: 20%;
+  margin-right: 40px;
 
-                            display: flex;
-                            flex-direction: column;
-                            /* align-items: center; */
-                            margin-bottom: 30px;
-                            /* background-color: white; */
-                            border-radius: 20px 20px 0 0;
-                        }
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  margin-bottom: 30px;
+  /* background-color: white; */
+  border-radius: 20px 20px 0 0;
+}
 
-
-
-
-                        .divDropBtnIngredients, .divDropBtnAppareils, .divDropBtnUstensils {
-                            /* border: 2px solid black;
+.divDropBtnIngredients,
+.divDropBtnAppareils,
+.divDropBtnUstensils {
+  /* border: 2px solid black;
                             padding: 2px; */
 
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            height: 45px;
-                            border-radius: 20px 20px 0 0;
-                        }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  border-radius: 10px 10px 0 0;
+}
 
-                                .divDropBtnIngredients div, .divDropBtnAppareils div, .divDropBtnUstensils div { 
-                                    background-color: white;
-                                    height: 45px;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    padding-right: 10px;
-                                    border-radius: 0 20px 0 0;
-                                }
+.divDropBtnIngredients div,
+.divDropBtnAppareils div,
+.divDropBtnUstensils div {
+  background-color: white;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10px;
+  border-radius: 0 10px 10px 0;
+}
 
+.divDropBtnIngredients i,
+.divDropBtnAppareils i,
+.divDropBtnUstensils i {
+}
 
+#dropdownBtn1,
+#dropdownBtn2,
+#dropdownBtn3 {
+  /* border: 2px solid black; */
+  /* margin: 5px; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  cursor: pointer;
+  background-color: white;
 
-                                        .divDropBtnIngredients i, .divDropBtnAppareils i, .divDropBtnUstensils i {
-                                            
-                                        }
+  padding-left: 10px;
+  font-family: Manrope, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  border-radius: 10px 0 0 10px;
+}
 
-                                #dropdownBtn1, #dropdownBtn2, #dropdownBtn3 {
-                                    /* border: 2px solid black; */
-                                    /* margin: 5px; */
-                                    display: flex;
-                                    justify-content: flex-start;
-                                    align-items: center;
-                                    width: 90%;
-                                    height: 100%;
-                                    cursor: pointer;
-                                    background-color: white;
+#dropdownBtn1.dropdown-open,
+#dropdownBtn2.dropdown-open,
+#dropdownBtn3.dropdown-open {
+  border-bottom-left-radius: 0;
+}
 
-                                    padding-left: 10px;
-                                    font-family: Manrope, sans-serif;
-                                    font-size: 12px;
-                                    font-weight: 500;
-                                    border-radius: 20px 0 0 0;
-                                }
+.divDropBtnIngredients div.dropdown-open,
+.divDropBtnAppareils div.dropdown-open,
+.divDropBtnUstensils div.dropdown-open {
+  border-bottom-right-radius: 0;
+}
 
+.dropdown-content {
+  /* border: 2px solid black; */
 
+  width: 100%;
+  /* height: 300px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0 0 20px 20px;
+  background-color: white;
+  font-family: Manrope, sans-serif;
+  font-size: 14px;
+}
 
+.close-icon {
+  display: none;
+}
 
-                        .dropdown-content {
-                            /* border: 2px solid black; */
-                            
-                            
-                            width: 100%;
-                            /* height: 300px; */
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            border-radius: 0 0 20px 20px;
-                            padding-left: 8px;
-                            padding-right: 8px;
-                            background-color: white;
-                        }
+.show2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  font-size: 11px;
+  background-color: black;
+  color: #ffd15b;
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+}
 
-
-                                .dropdown-content form {
-                                    /* border: 2px solid black; */
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                    padding: 10px;
-                                    width: 100%;
-                                    /* margin-top: 5px;
+.dropdown-content form {
+  /* border: 2px solid black; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  /* margin-top: 5px;
                                     margin-bottom: 5px; */
-                                    background-color: white;
+  background-color: white;
+}
 
+.ingredientsInputClose,
+.appareilsInputClose,
+.ustensilsInputClose {
+  display: none;
+}
 
-                                }
+.inputCloseShow {
+  cursor: pointer;
+  color: rgb(219, 219, 219);
+  border-top: 2px solid rgb(219, 219, 219);
+  border-bottom: 2px solid rgb(219, 219, 219);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+}
 
-
-                                        .dropdown-content #myIngredientInput, .dropdown-content #myAppareilInput, .dropdown-content #myUstensilInput {
-                                            border-left: 2px solid rgb(219, 219, 219);
-                                            border-top: 2px solid rgb(219, 219, 219);
-                                            border-bottom: 2px solid rgb(219, 219, 219);
-                                            /* margin-top: 5px;
+.dropdown-content #myIngredientInput,
+.dropdown-content #myAppareilInput,
+.dropdown-content #myUstensilInput {
+  border-left: 2px solid rgb(219, 219, 219);
+  border-top: 2px solid rgb(219, 219, 219);
+  border-bottom: 2px solid rgb(219, 219, 219);
+  /* margin-top: 5px;
                                             margin-bottom: 5px; */
-                                            
-                                            width: 90%;
-                                            height: 40px;
-                                        }
 
-                                
-                                        .dropdown-content form i {
-                                            border-top: 2px solid rgb(219, 219, 219);
-                                            border-right: 2px solid rgb(219, 219, 219);
-                                            border-bottom: 2px solid rgb(219, 219, 219);
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            width: 10%;
-                                            font-size: 10px;
-                                            color: beige;
+  width: 90%;
+  height: 40px;
+  font-family: Manrope, sans-serif;
+  font-size: 13px;
+  color: rgb(219, 219, 219);
+}
 
-                                        }
+.dropdown-content form i {
+  border-top: 2px solid rgb(219, 219, 219);
+  border-right: 2px solid rgb(219, 219, 219);
+  border-bottom: 2px solid rgb(219, 219, 219);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  font-size: 10px;
+  color: beige;
+}
 
-                                        .rotate {
-                                            transform: rotate(180deg);
-                                        }
+.rotate {
+  transform: rotate(180deg);
+}
 
+.dropdown-content form .fas.fa-search {
+  /* border: 2px solid black; */
+  height: 40px;
+  color: rgb(219, 219, 219);
+}
 
-                                            .dropdown-content form .fas.fa-search {
-                                                /* border: 2px solid black; */
-                                                height: 40px;
-                                                color: rgb(219, 219, 219);
-                                            }
+.myDropdown1__divIngredientsSelectionnés,
+.myDropdown2__divAppareilsSelectionnés,
+.myDropdown3__divUstensilsSelectionnés {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
 
-                                .myDropdown1__divIngredientsSelectionnés, .myDropdown2__divAppareilsSelectionnés, .myDropdown3__divUstensilsSelectionnés {
-                                    display: flex;
-                                    flex-direction: column;
-                                    margin-bottom: 20px;
+.myDropdown1__divIngredientsSelectionnés p,
+.myDropdown2__divAppareilsSelectionnés p,
+.myDropdown3__divUstensilsSelectionnés p {
+  margin-bottom: 10px;
+  padding: 6px;
+  padding-left: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 0;
+}
 
-                                }
+.dropdown-content #myDropdownContent {
+  /* border: 2px solid black; */
 
-                                .myDropdown1__divIngredientsSelectionnés p, .myDropdown2__divAppareilsSelectionnés p, .myDropdown3__divUstensilsSelectionnés p {
-                                    margin-bottom: 10px;
-                                    padding: 8px;
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                }
+  width: 100%;
+  margin-bottom: 5px;
+  background-color: white;
+  max-height: 200px; /* Hauteur maximale de la div parente pour activer le défilement vertical */
+  overflow-y: auto; /* Défilement vertical */
+  border-radius: 0 0 20px 20px;
+}
 
-                                .dropdown-content #myDropdownContent {
-                                    /* border: 2px solid black; */
-                                
-                                    width: 100%;
-                                    height: 200px;
-                                    margin-bottom: 5px;
-                                    background-color: white;
-                                    max-height: 200px; /* Hauteur maximale de la div parente pour activer le défilement vertical */
-                                    overflow-y: auto; /* Défilement vertical */
-                                }
+.ingredient__selectione,
+.appareil__selectione,
+.ustensil__selectione {
+  /* width: 80%; */
+  /* height: 40px; */
+  /* background-color: #FFD15B; */
+  /* border-radius: 10px; */
+  margin-bottom: 2px;
+  /* margin-left: 10px; */
 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
 
+  font-weight: 400;
+  padding: 6px;
+}
 
-                    
-                    
-                        .ingredient__selectione, .appareil__selectione, .ustensil__selectione {
-                            /* width: 80%; */
-                            /* height: 40px; */
-                            /* background-color: #FFD15B; */
-                            /* border-radius: 10px; */
-                            margin-bottom: 10px;
+.ingredient__selectione:hover,
+.appareil__selectione:hover,
+.ustensil__selectione:hover {
+  cursor: pointer;
+  /* background-color: #FFD15B; */
+}
 
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            font-size: 12px;
-                            font-family: Manrope, sans-serif;
-                            padding: 6px;
+.paragrapheFlitreIngredient,
+.paragrapheFlitreAppareil,
+.paragrapheFlitreUstensil {
+  font-weight: 200;
+  margin-left: 10px;
+}
 
-                        }
+.close-icon {
+  cursor: pointer;
+  margin-right: 5px;
+  font-size: 7px;
+}
 
-                        .ingredient__selectione:hover, .appareil__selectione:hover, .ustensil__selectione:hover { 
-                            cursor: pointer;
-                        }
+.sectionTri__nbrDeRecette {
+  /* border: 2px solid black; */
+  margin: 5px;
+  width: 10%;
+}
 
-
-                                .paragrapheFlitreIngredient, .paragrapheFlitreAppareil, .paragrapheFlitreUstensil {
-                                    margin-left: 5px;
-                                }
-
-
-                                .close-icon {
-                                    cursor: pointer;
-                                    margin-right: 5px;
-                                    font-size: 8px;
-                                }
-
-
-
-
-
-
-
-            .sectionTri__nbrDeRecette {
-                /* border: 2px solid black; */
-                margin: 5px;
-                width: 10%;
-            }
-
-
-    
-
+.nbrDeRecette {
+  font-family: Manrope, sans-serif;
+}
 
 .sectionArticleRecette {
-    /* border: 2px solid black; */
-    /* margin: 5px; */
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 60px;
-    margin: 10px 2px 50px 20px;
-    font-family: Manrope;
+  /* border: 2px solid black;
+    margin: 3px; */
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
+.sectionArticleRecette__sectionTags {
+  /* border: 2px solid black;
+                margin: 3px; */
 
+  position: relative;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 90px 2px 50px 0;
+}
 
-    .sectionArticleRecette__articleRecette {
-        /* border: 2px solid black; */
-        /* margin: 3px; */
+.sectionTags__IngredientsTagues,
+.sectionTags__appareilsTagues,
+.sectionTags__ustensilsTagues {
+  /* border: 2px solid black; */
+  margin: 3px;
 
-        background-color: white;
-        border-radius: 20px;
-        width: 320px;
-        display: flex;
-        flex-direction: column;
+  margin-right: 32px;
+  width: 210px;
+  display: flex;
+  flex-direction: column;
+}
 
+.sectionTags__IngredientsTagues p,
+.sectionTags__appareilsTagues p,
+.sectionTags__ustensilsTagues p {
+  font-family: Manrope;
+  background-color: #ffd15b;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  width: 95%;
+  z-index: 800;
+  margin-bottom: 10px;
+}
 
-    }
+.articleRecette {
+  /* border: 2px solid black; */
+  /* margin: 5px; */
+  position: relative;
+  z-index: 80;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 60px;
+  font-family: Manrope;
+  font-weight: 200;
+}
 
+.sectionArticleRecette__articleRecette {
+  /* border: 2px solid black; */
+  /* margin: 3px; */
 
+  background-color: white;
+  border-radius: 20px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
 
-            .articleRecette__figureRecette {
-                /* border: 2px solid black; */
-                /* margin: 3px; */
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                border-radius: inherit;
+.articleRecette__figureRecette {
+  /* border: 2px solid black; */
+  /* margin: 3px; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: inherit;
+}
 
+.figureRecette__divImgRecette {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: inherit;
+}
 
-            }
+.divImgRecette__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+}
 
+.divImgRecette__divTime {
+  width: 70px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #ffd15b;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-                    .figureRecette__divImgRecette {
-                        position: relative;
-                        width: 100%;
-                        height: 250px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: inherit;
+.divTime__time {
+  font-size: 12px;
+}
 
-                    }
+.figureRecette__figcapRecette {
+  /* border: 2px solid black; */
+  width: 80%;
+  margin: 40px 0 0 20px;
+}
 
+.figcapRecette__nomRecette {
+  /* border: 2px solid black; */
+  margin: 3px;
+  font-family: "Anton", sans-serif;
+  font-size: 20px;
+}
 
+.articleRecette__sectionRecette {
+  /* border: 2px solid black; */
+  margin: 40px 0 0 20px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
 
-                            .divImgRecette__img {
-                                  width: 100%;
-                                  height: 100%;
-                                  object-fit: cover;
-                                  border-radius: 20px 20px 0 0;
-                            }
+.sectionRecette__titreH2 {
+  /* border: 2px solid black; */
+  margin: 3px 0 20px 3px;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 1.08px;
+  font-size: 12px;
+}
 
+.sectionRecette__paragrapheDetailRecette {
+  /* border: 2px solid black; */
+  margin: 3px;
+  height: 130px;
+  overflow: hidden; /* Cacher le texte qui dépasse */
+  text-overflow: ellipsis; /* j'ajoute les points de suspension */
+  font-size: 13px;
+}
 
-                            .divImgRecette__divTime {
-                                width: 70px;
-                                height: 20px;
-                                border-radius: 10px;
-                                background-color: #FFD15B;
-                                position: absolute;
-                                    top: 20px;
-                                    right: 20px;
+.articleRecette__sectionIngredient {
+  /* border: 2px solid black; */
+  margin: 40px 0 0 20px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
 
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
+.sectionIngredient__titreH2 {
+  /* border: 2px solid black; */
+  margin: 3px;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: 1.08px;
+  font-size: 12px;
+}
 
-                            }
+.sectionIngredient__divArticleIngredient {
+  /* border: 2px solid black; */
+  margin: 3px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Deux colonnes de largeur égale */
+  gap: 25px;
+  margin: 10px 2px 50px 2px;
+}
 
+.divArticleIngredient__articleIngrdient {
+  /* border: 2px solid black; */
+  margin: 3px;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
 
-                                    .divTime__time {
-                                        font-size: 12px;
-                                        
-                                    }
+.articleIngrdient__titreH3 {
+}
 
-
-
-
-                    .figureRecette__figcapRecette {
-                        /* border: 2px solid black; */
-                        width: 80%;
-                        margin: 40px 0 0 20px;
-                    }
-
-
-                        .figcapRecette__nomRecette {
-                            /* border: 2px solid black; */
-                            margin: 3px;
-                            font-family: 'Anton', sans-serif;
-                            font-size: 20px;
-                        }
-
-
-
-
-
-
-
-
-            .articleRecette__sectionRecette {
-                /* border: 2px solid black; */
-                margin: 40px 0 0 20px;
-                width: 90%;
-                display: flex;
-                flex-direction: column;
-
-
-            }
-
-                .sectionRecette__titreH2 {
-                    /* border: 2px solid black; */
-                    margin: 3px 0 20px 3px;
-                    font-family: 'Manrope', sans-serif;
-                    letter-spacing: 1.08px;
-                    font-size: 12px;
-
-                }
-
-
-                .sectionRecette__paragrapheDetailRecette {
-                    /* border: 2px solid black; */
-                    margin: 3px;
-                    height: 130px;
-                    overflow: hidden; /* Cacher le texte qui dépasse */
-                    text-overflow: ellipsis; /* Ajouter les points de suspension */
-                    font-size: 13px;
-
-                }
-
-
-            .articleRecette__sectionIngredient {
-                /* border: 2px solid black; */
-                margin: 40px 0 0 20px;
-                width: 90%;
-                display: flex;
-                flex-direction: column;
-                
-
-            }
-
-                .sectionIngredient__titreH2 {
-                    /* border: 2px solid black; */
-                    margin: 3px;
-                    font-family: 'Manrope', sans-serif;
-                    letter-spacing: 1.08px;
-                    font-size: 12px;
-
-                }
-
-
-                .sectionIngredient__divArticleIngredient {
-                    /* border: 2px solid black; */
-                    margin: 3px;
-                    display: grid;
-                    grid-template-columns: 1fr 1fr; /* Deux colonnes de largeur égale */
-                    gap: 25px;
-                    margin: 10px 2px 50px 2px;
-                }
-
-
-                    .divArticleIngredient__articleIngrdient {
-                        /* border: 2px solid black; */
-                        margin: 3px;
-                        display: flex;
-                        flex-direction: column;
-                        font-size: 13px;
-                    }
-
-
-                        .articleIngrdient__titreH3 {
-
-                        }
-
-                        .articleIngrdient__dosage {
-
-                        }
-
+.articleIngrdient__dosage {
+}
 
 .hide {
-    display: none;
+  display: none;
 }
 
-        
-
-
+.bold500 {
+  font-weight: 500;
+}

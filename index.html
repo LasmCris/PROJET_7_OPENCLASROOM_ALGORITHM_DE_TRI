@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;500&display=swap"
       rel="stylesheet"
     />
 
@@ -62,9 +62,14 @@
               </div>
             </div>
 
-            <div id="myDropdown1" class="dropdown-content" style="display: none">
+            <div
+              id="myDropdown1"
+              class="dropdown-content"
+              style="display: none"
+            >
               <form action="">
                 <input type="text" placeholder="..." id="myIngredientInput" />
+                <span class="ingredientsInputClose"> &#x2716; </span>
                 <i class="fas fa-search"></i>
               </form>
 
@@ -75,7 +80,7 @@
               <template id="templateFiltreIngredients">
                 <div class="ingredient__selectione">
                   <p class="paragrapheFlitreIngredient"></p>
-                  <span class="close-icon" style="display: none;">&#x2716;</span>
+                  <span class="close-icon"> &#x2716; </span>
                 </div>
               </template>
             </div>
@@ -89,9 +94,14 @@
               </div>
             </div>
 
-            <div id="myDropdown2" class="dropdown-content" style="display: none">
+            <div
+              id="myDropdown2"
+              class="dropdown-content"
+              style="display: none"
+            >
               <form action="">
                 <input type="text" placeholder="..." id="myAppareilInput" />
+                <span class="appareilsInputClose"> &#x2716; </span>
                 <i class="fas fa-search"></i>
               </form>
 
@@ -102,7 +112,7 @@
               <template id="templateFiltreAppareils">
                 <div class="appareil__selectione">
                   <p class="paragrapheFlitreAppareil"></p>
-                  <span class="close-icon" style="display: none;">&#x2716;</span>
+                  <span class="close-icon">&#x2716;</span>
                 </div>
               </template>
             </div>
@@ -116,9 +126,14 @@
               </div>
             </div>
 
-            <div id="myDropdown3" class="dropdown-content" style="display: none">
+            <div
+              id="myDropdown3"
+              class="dropdown-content"
+              style="display: none"
+            >
               <form action="">
                 <input type="text" placeholder="..." id="myUstensilInput" />
+                <span class="ustensilsInputClose"> &#x2716; </span>
                 <i class="fas fa-search"></i>
               </form>
 
@@ -129,7 +144,7 @@
               <template id="templateFiltreUstensils">
                 <div class="ustensil__selectione">
                   <p class="paragrapheFlitreUstensil"></p>
-                  <span class="close-icon" style="display: none;">&#x2716;</span>
+                  <span class="close-icon">&#x2716;</span>
                 </div>
               </template>
             </div>
@@ -137,11 +152,21 @@
         </div>
 
         <div class="sectionTri__nbrDeRecette">
-          <p class="nbrDeRecette">(NBR recette)</p>
+          <p class="nbrDeRecette">1500 Recettes</p>
         </div>
       </section>
 
-      <section class="sectionArticleRecette"></section>
+      <section class="sectionArticleRecette">
+        <section class="sectionArticleRecette__sectionTags">
+          <div class="sectionTags__IngredientsTagues"></div>
+
+          <div class="sectionTags__appareilsTagues"></div>
+
+          <div class="sectionTags__ustensilsTagues"></div>
+        </section>
+
+        <section class="articleRecette"></section>
+      </section>
     </main>
 
     <script type="module" src="./data/recipes.js"></script>

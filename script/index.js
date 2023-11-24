@@ -9,11 +9,10 @@ import {
 import searchRecipes from "./algoSearch.js";
 
 // J'obtiens ainsi la section parent où les articles de recette seront générés
-const sectionArticleRecette = document.querySelector(".sectionArticleRecette");
+const sectionArticleRecette = document.querySelector(".articleRecette");
 
 // Fonction pour générer dynamiquement un article de recette
 export function generateRecipeArticle(recipe) {
-
   //Si un article doit rester initialement chaché, on doit rajouté la class 'hide" a "articleRecette"
   const articleRecette = document.createElement("article");
   articleRecette.classList.add("sectionArticleRecette__articleRecette");
@@ -88,7 +87,9 @@ export function generateRecipeArticle(recipe) {
     const dosageIngredient = document.createElement("p");
     dosageIngredient.classList.add("articleIngrdient__dosage");
     const valeurParDefault = "";
-    dosageIngredient.textContent = `${ingredient.quantity} ${ingredient.unit ?? valeurParDefault}`;
+    dosageIngredient.textContent = `${ingredient.quantity} ${
+      ingredient.unit ?? valeurParDefault
+    }`;
 
     articleIngrdient.appendChild(titreH3Ingredient);
     articleIngrdient.appendChild(dosageIngredient);
@@ -112,7 +113,6 @@ recipes.forEach((recipe) => {
   sectionArticleRecette.appendChild(recipeArticle);
 });
 
-
 // J'affiche les recettes dans la section parent (avec vérification de `recipes`)
 if (Array.isArray(recipes) && recipes.length > 0) {
   recipes.forEach((recipe) => {
@@ -121,9 +121,8 @@ if (Array.isArray(recipes) && recipes.length > 0) {
   });
 } else {
   // ICI je Gére le cas où `recipes` n'est pas défini ou vide
-  // Soit afficher un message d'erreur soit ne rien faire.
+  // Soit j'affiche un message d'erreur soit ne rien faire.
 }
-
 
 // Sélecteur DOM de la barre de recherche
 const searchInput = document.querySelector(".formulaire__inputSearch");
@@ -131,12 +130,11 @@ const searchInput = document.querySelector(".formulaire__inputSearch");
 // // Sélecteur DOM de la section des articles de recette
 // const sectionArticleRecette = document.querySelector(".sectionArticleRecette");
 
-
 // Écouteur d'événements pour la saisie dans la barre de recherche
 searchInput.addEventListener("input", function () {
   const input = searchInput.value.toLowerCase();
 
-  // Vérifier si la longueur de la requête est supérieure ou égale à 3 caractères
+  // Je verifie si la longueur de la requête est supérieure ou égale à 3 caractères
   if (input.length >= 3) {
     const filteredRecipes = searchRecipes(
       input,
@@ -144,16 +142,16 @@ searchInput.addEventListener("input", function () {
       ustensilsTagés,
       appareilsTagés
     );
-    // Effacer la section avant d'ajouter les nouvelles recettes
+    // Effacer la section avant d'j'ajoute les nouvelles recettes
     sectionArticleRecette.innerHTML = "";
 
-    // Générer et ajouter dynamiquement les articles de recette
+    // Générer et j'ajoute dynamiquement les articles de recette
     filteredRecipes.forEach((recipe) => {
       const recipeArticle = generateRecipeArticle(recipe);
       sectionArticleRecette.appendChild(recipeArticle);
     });
   } else {
-    // Si la longueur de la requête est inférieure à 3 caractères, réafficher tous les articles de recette
+    // Si la longueur de la requête est inférieure à 3 caractères, réj'affiche tous les articles de recette
     sectionArticleRecette.innerHTML = "";
     recipes.forEach((recipe) => {
       const recipeArticle = generateRecipeArticle(recipe);
@@ -161,6 +159,5 @@ searchInput.addEventListener("input", function () {
     });
   }
 });
-
 
 export default generateRecipeArticle;
