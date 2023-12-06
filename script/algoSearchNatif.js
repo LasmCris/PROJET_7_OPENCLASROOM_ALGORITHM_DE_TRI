@@ -1,11 +1,12 @@
 // Import de la fonction et de l'objet recipes
 import recipes from "/data/recipes.js";
 
-
-// Fonction customIncludes pour émuler la fonction includes avec une boucle native
-function customIncludes(str, target) {
-  for (let i = 0; i < str.length - target.length + 1; i++) {
-    if (str.slice(i, i + target.length) === target) {
+// Fonction fonctionIncludesNative pour simuler la fonction includes avec une boucle native
+function fonctionIncludesNative(ceQueJeSearch, cibleDeLaSearch) {
+  for (let i = 0; i < ceQueJeSearch.length - cibleDeLaSearch.length + 1; i++) {
+    if (
+      ceQueJeSearch.slice(i, i + cibleDeLaSearch.length) === cibleDeLaSearch
+    ) {
       return true;
     }
   }
@@ -18,75 +19,77 @@ function searchRecipes(
   ustensilsTagés,
   appareilsTagés
 ) {
-  const filteredRecipes = [];
+  const recettesApresFiltres = [];
 
   for (const recipe of recipes) {
-    const lowerCasedInput = input.toLowerCase();
-    const lowerCasedName = recipe.name.toLowerCase();
-    const lowerCasedDescription = recipe.description.toLowerCase();
-    const lowerCasedAppliance = recipe.appliance.toLowerCase();
+    const inputEnMinuscule = input.toLowerCase();
+    const nomRecetteEnMinuscule = recipe.name.toLowerCase();
+    const descrRecetteEnMinuscule = recipe.description.toLowerCase();
+    const appareilsEnMinuscule = recipe.appliance.toLowerCase();
 
-    let found = false;
+    let dedans = false;
 
     // Vérification du titre, de la liste des ingrédients et de la description
     if (
-      customIncludes(lowerCasedName, lowerCasedInput) ||
-      customIncludes(lowerCasedDescription, lowerCasedInput)
+      fonctionIncludesNative(nomRecetteEnMinuscule, inputEnMinuscule) ||
+      fonctionIncludesNative(descrRecetteEnMinuscule, inputEnMinuscule)
     ) {
-      found = true;
+      dedans = true;
     } else {
       for (const ingredient of recipe.ingredients) {
         if (
-          customIncludes(ingredient.ingredient.toLowerCase(), lowerCasedInput)
+          fonctionIncludesNative(
+            ingredient.ingredient.toLowerCase(),
+            inputEnMinuscule
+          )
         ) {
-          found = true;
+          dedans = true;
           break;
         }
       }
     }
 
     // Vérification des tags d'ingrédients
-    if (!found) {
+    if (!dedans) {
       for (const tag of ingredientsTagés) {
         for (const ingredient of recipe.ingredients) {
-          if (customIncludes(ingredient.ingredient.toLowerCase(), tag)) {
-            found = true;
+          if (
+            fonctionIncludesNative(ingredient.ingredient.toLowerCase(), tag)
+          ) {
+            dedans = true;
             break;
           }
         }
-        if (found) break;
+        if (dedans) break;
       }
     }
 
     // Vérification des ustensiles
-    if (!found) {
+    if (!dedans) {
       for (const tag of ustensilsTagés) {
         for (const ustensil of recipe.ustensils) {
-          if (customIncludes(ustensil.toLowerCase(), tag)) {
-            found = true;
+          if (fonctionIncludesNative(ustensil.toLowerCase(), tag)) {
+            dedans = true;
             break;
           }
         }
-        if (found) break;
+        if (dedans) break;
       }
     }
 
     // Vérification de l'appareil
-    if (!found) {
-      if (customIncludes(lowerCasedAppliance, appareilsTagés)) {
-        found = true;
+    if (!dedans) {
+      if (fonctionIncludesNative(appareilsEnMinuscule, appareilsTagés)) {
+        dedans = true;
       }
     }
 
-    if (found) {
-      filteredRecipes.push(recipe);
+    if (dedans) {
+      recettesApresFiltres.push(recipe);
     }
   }
 
-  return filteredRecipes;
+  return recettesApresFiltres;
 }
-
-
-
 
 export default searchRecipes;

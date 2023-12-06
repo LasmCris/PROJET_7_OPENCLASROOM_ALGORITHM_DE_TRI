@@ -6,7 +6,7 @@ import {
   appareilsTagés,
 } from "./optionSelect.js";
 
-import searchRecipes from "./algoSearch.js";
+import searchRecipes from "./algoSearchNatif.js";
 
 // J'obtiens ainsi la section parent où les articles de recette seront générés
 const sectionArticleRecette = document.querySelector(".articleRecette");
@@ -136,7 +136,7 @@ searchInput.addEventListener("input", function () {
 
   // Je verifie si la longueur de la requête est supérieure ou égale à 3 caractères
   if (input.length >= 3) {
-    const filteredRecipes = searchRecipes(
+    const recettesApresFiltres = searchRecipes(
       input,
       ingredientsTagés,
       ustensilsTagés,
@@ -146,7 +146,7 @@ searchInput.addEventListener("input", function () {
     sectionArticleRecette.innerHTML = "";
 
     // Générer et j'ajoute dynamiquement les articles de recette
-    filteredRecipes.forEach((recipe) => {
+    recettesApresFiltres.forEach((recipe) => {
       const recipeArticle = generateRecipeArticle(recipe);
       sectionArticleRecette.appendChild(recipeArticle);
     });
