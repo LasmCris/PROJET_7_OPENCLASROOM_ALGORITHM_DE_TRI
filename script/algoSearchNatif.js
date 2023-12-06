@@ -35,7 +35,8 @@ function searchRecipes(
       fonctionIncludesNative(descrRecetteEnMinuscule, inputEnMinuscule)
     ) {
       dedans = true;
-    } else {
+    } 
+    if (!dedans) {
       for (const ingredient of recipe.ingredients) {
         if (
           fonctionIncludesNative(
