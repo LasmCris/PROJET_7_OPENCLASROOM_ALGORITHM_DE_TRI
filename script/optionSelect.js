@@ -35,7 +35,7 @@ function displayIngredients(ingredients) {
     ".myDropdown1__divIngredientsSelectionnés"
   );
   var taggedIngredientsDiv = document.querySelector(
-    ".sectionTags__IngredientsTagues"
+    ".sectionTags__IngredientsAppareilsUstensilsTagues"
   );
 
   dropdownContent.innerHTML = ""; // Je réinitialise le contenu du dropdown
@@ -103,7 +103,27 @@ function displayIngredients(ingredients) {
 
         // j'ajoute le clone à la div .sectionTags__IngredientsTagues
         var taggedIngredientClone = templateParagraph.cloneNode(true);
+
+        // j'ajoute une icône de fermeture à l'élément cloné
+        var closeIcon2 = document.createElement("span");
+        closeIcon2.className = "close-icon2";
+        closeIcon2.textContent = "\u2716"; // Symbole de fermeture (X)
+
         taggedIngredientsDiv.appendChild(taggedIngredientClone);
+        taggedIngredientClone.appendChild(closeIcon2);
+
+        // j'ajoute un gestionnaire d'événements à l'icône de fermeture
+        closeIcon2.addEventListener("click", function () {
+          // je retire le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
+          selectedIngredientsDiv.removeChild(selectedIngredientClone);
+          taggedIngredientsDiv.removeChild(taggedIngredientClone); // je retire également de .sectionTags__IngredientsTagues
+
+          // je retire le texte du paragraphe du tableau ingredientsTagés
+          ingredientsTagés = ingredientsTagés.filter(
+            (texte) => texte !== ingredient
+          );
+          console.log(ingredientsTagés);
+        });
       }
     });
 
@@ -235,7 +255,7 @@ function displayAppareils(appareils) {
     ".myDropdown2__divAppareilsSelectionnés"
   );
   var taggedAppareilsDiv = document.querySelector(
-    ".sectionTags__appareilsTagues"
+    ".sectionTags__IngredientsAppareilsUstensilsTagues"
   );
 
   dropdownContent.innerHTML = ""; // Je réinitialise le contenu du dropdown
@@ -297,7 +317,25 @@ function displayAppareils(appareils) {
 
         // j'ajoute le clone à la div .sectionTags__appareilsTagues
         var taggedAppareilClone = templateParagraph.cloneNode(true);
+
+        // j'ajoute une icône de fermeture à l'élément cloné
+        var closeIcon2 = document.createElement("span");
+        closeIcon2.className = "close-icon2";
+        closeIcon2.textContent = "\u2716"; // Symbole de fermeture (X)
+
         taggedAppareilsDiv.appendChild(taggedAppareilClone);
+        taggedAppareilClone.appendChild(closeIcon2);
+
+        // j'ajoute un gestionnaire d'événements à l'icône de fermeture
+        closeIcon2.addEventListener("click", function () {
+          // je retire le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
+          selectedAppareilsDiv.removeChild(selectedAppareilClone);
+          taggedAppareilsDiv.removeChild(taggedAppareilClone); // je retire également de .sectionTags__appareilsTagues
+
+          // je retire le texte du paragraphe du tableau appareilsTagés
+          appareilsTagés = appareilsTagés.filter((texte) => texte !== appareil);
+          console.log(appareilsTagés);
+        });
       }
     });
 
@@ -427,7 +465,7 @@ function displayUstensils(ustensils) {
     ".myDropdown3__divUstensilsSelectionnés"
   );
   var taggedUstensilsDiv = document.querySelector(
-    ".sectionTags__ustensilsTagues"
+    ".sectionTags__IngredientsAppareilsUstensilsTagues"
   );
 
   dropdownContent.innerHTML = ""; // Je réinitialise le contenu du dropdown
@@ -489,7 +527,25 @@ function displayUstensils(ustensils) {
 
         // j'ajoute le clone à la div .sectionTags__ustensilsTagues
         var taggedUstensilClone = templateParagraph.cloneNode(true);
+
+        // j'ajoute une icône de fermeture à l'élément cloné
+        var closeIcon2 = document.createElement("span");
+        closeIcon2.className = "close-icon2";
+        closeIcon2.textContent = "\u2716"; // Symbole de fermeture (X)
+
         taggedUstensilsDiv.appendChild(taggedUstensilClone);
+        taggedUstensilClone.appendChild(closeIcon2);
+
+        // j'ajoute un gestionnaire d'événements à l'icône de fermeture
+        closeIcon2.addEventListener("click", function () {
+          // je retire le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
+          selectedUstensilsDiv.removeChild(selectedUstensilClone);
+          taggedUstensilsDiv.removeChild(taggedUstensilClone); // je retire également de .sectionTags__ustensilsTagues
+
+          // je retire le texte du paragraphe du tableau ustensilsTagés
+          ustensilsTagés = ustensilsTagés.filter((texte) => texte !== ustensil);
+          console.log(ustensilsTagés);
+        });
       }
     });
 
