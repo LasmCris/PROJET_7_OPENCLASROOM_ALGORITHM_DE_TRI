@@ -6,7 +6,7 @@ import {
   appareilsTagés,
 } from "./optionSelect.js";
 
-import searchRecipes from "./algoSearch.js";
+import searchRecipes from "./algoSearchFonctionel.js";
 
 // J'obtiens ainsi la section parent où les articles de recette seront générés
 const sectionArticleRecette = document.querySelector(".articleRecette");
