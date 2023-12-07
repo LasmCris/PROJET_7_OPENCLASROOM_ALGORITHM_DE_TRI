@@ -1,17 +1,6 @@
 // Import de la fonction et de l'objet recipes
 import recipes from "/data/recipes.js";
 
-// Fonction fonctionIncludesNative pour simuler la fonction includes avec une boucle native
-function fonctionIncludesNative(ceQueJeSearch, cibleDeLaSearch) {
-  for (let i = 0; i < ceQueJeSearch.length - cibleDeLaSearch.length + 1; i++) {
-    if (
-      ceQueJeSearch.slice(i, i + cibleDeLaSearch.length) === cibleDeLaSearch
-    ) {
-      return true;
-    }
-  }
-  return false;
-}
 
 function searchRecipes(
   input,
@@ -31,19 +20,13 @@ function searchRecipes(
 
     // Vérification du titre, de la liste des ingrédients et de la description
     if (
-      fonctionIncludesNative(nomRecetteEnMinuscule, inputEnMinuscule) ||
-      fonctionIncludesNative(descrRecetteEnMinuscule, inputEnMinuscule)
+      nomRecetteEnMinuscule.includes(inputEnMinuscule) ||
+      descrRecetteEnMinuscule.includes(inputEnMinuscule)
     ) {
       dedans = true;
-    } 
-    if (!dedans) {
+    } else {
       for (const ingredient of recipe.ingredients) {
-        if (
-          fonctionIncludesNative(
-            ingredient.ingredient.toLowerCase(),
-            inputEnMinuscule
-          )
-        ) {
+        if (ingredient.ingredient.toLowerCase().includes(inputEnMinuscule)) {
           dedans = true;
           break;
         }
@@ -54,9 +37,7 @@ function searchRecipes(
     if (!dedans) {
       for (const tag of ingredientsTagés) {
         for (const ingredient of recipe.ingredients) {
-          if (
-            fonctionIncludesNative(ingredient.ingredient.toLowerCase(), tag)
-          ) {
+          if (ingredient.ingredient.toLowerCase() === tag) {
             dedans = true;
             break;
           }
@@ -69,7 +50,7 @@ function searchRecipes(
     if (!dedans) {
       for (const tag of ustensilsTagés) {
         for (const ustensil of recipe.ustensils) {
-          if (fonctionIncludesNative(ustensil.toLowerCase(), tag)) {
+          if (ustensil.toLowerCase() === tag) {
             dedans = true;
             break;
           }
@@ -80,7 +61,7 @@ function searchRecipes(
 
     // Vérification de l'appareil
     if (!dedans) {
-      if (fonctionIncludesNative(appareilsEnMinuscule, appareilsTagés)) {
+      if (appareilsTagés.includes(appareilsEnMinuscule)) {
         dedans = true;
       }
     }
@@ -92,5 +73,6 @@ function searchRecipes(
 
   return recettesApresFiltres;
 }
+
 
 export default searchRecipes;
