@@ -456,6 +456,7 @@ main {
   gap: 60px;
   font-family: Manrope;
   font-weight: 200;
+  padding-left: 30px;
 }
 
 .sectionArticleRecette__articleRecette {
