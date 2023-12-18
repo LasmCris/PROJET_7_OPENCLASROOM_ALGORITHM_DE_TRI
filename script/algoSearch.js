@@ -2,32 +2,41 @@
 import recipes from "/data/recipes.js";
 
 // Fonction de recherche étendue avec les tags sélectionnés
-function searchRecipes(
-  input,
-  ingredientsTagés,
-  ustensilsTagés,
-  appareilsTagés
-) {
-  // je filtre les recettes en fonction de la requête de recherche
+// Fonction pour filtrer les recettes en fonction des tags
+function filterRecipesByTags(recipe, ingredientsTagés, ustensilsTagés, appareilsTagés, zonneDetag) {
+  return (
+    // Vérification des tags d'ingrédients
+    ingredientsTagés.some((tag) =>
+      recipe.ingredients
+        .map((ingredient) => ingredient.ingredient.toLowerCase())
+        .includes(tag)
+    ) ||
+    // Vérification des tags d'ustensiles
+    ustensilsTagés.some((tag) =>
+      recipe.ustensils.map((ustensil) => ustensil.toLowerCase()).includes(tag)
+    ) ||
+    // Vérification des tags d'appareils
+    appareilsTagés.includes(recipe.appliance.toLowerCase()) ||
+    // Vérification des tags de la zone de détag
+    zonneDetag.some((tag) => tag && recipe.name.toLowerCase().includes(tag))
+  );
+}
+
+// Fonction principale pour rechercher les recettes
+function searchRecipes(input, ingredientsTagés, ustensilsTagés, appareilsTagés, zonneDetag) {
+  // Filtrage des recettes en fonction de la requête de recherche et des tags
   return recipes.filter(
     (recipe) =>
-      // Je verifie le titre, la liste des ingrédients et la description
+      // Vérification du titre, de la liste des ingrédients et de la description
       recipe.name.toLowerCase().includes(input) ||
       recipe.ingredients.some((ingredient) =>
         ingredient.ingredient.toLowerCase().includes(input)
       ) ||
       recipe.description.toLowerCase().includes(input) ||
-      // Je verifie les tags d'ingrédients, ustensiles et appareils sélectionnés
-      ingredientsTagés.some((tag) =>
-        recipe.ingredients
-          .map((ingredient) => ingredient.ingredient.toLowerCase())
-          .includes(tag)
-      ) ||
-      ustensilsTagés.some((tag) =>
-        recipe.ustensils.map((ustensil) => ustensil.toLowerCase()).includes(tag)
-      ) ||
-      appareilsTagés.includes(recipe.appliance.toLowerCase())
+      // Utilisation de la fonction pour filtrer les recettes en fonction des tags
+      filterRecipesByTags(recipe, ingredientsTagés, ustensilsTagés, appareilsTagés, zonneDetag)
   );
 }
+
 
 export default searchRecipes;

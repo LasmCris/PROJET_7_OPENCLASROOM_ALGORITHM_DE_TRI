@@ -127,37 +127,96 @@ if (Array.isArray(recipes) && recipes.length > 0) {
 // Sélecteur DOM de la barre de recherche
 const searchInput = document.querySelector(".formulaire__inputSearch");
 
-// // Sélecteur DOM de la section des articles de recette
-// const sectionArticleRecette = document.querySelector(".sectionArticleRecette");
 
-// Écouteur d'événements pour la saisie dans la barre de recherche
+
+// Fonction pour générer et ajouter dynamiquement les articles de recette
+function generateAndAppendRecipeArticles(recipes) {
+  sectionArticleRecette.innerHTML = "";
+
+  recipes.forEach((recipe) => {
+    const recipeArticle = generateRecipeArticle(recipe);
+    sectionArticleRecette.appendChild(recipeArticle);
+  });
+}
+
+// Écouteur d'événement pour la saisie de recherche
 searchInput.addEventListener("input", function () {
   const input = searchInput.value.toLowerCase();
 
-  // Je verifie si la longueur de la requête est supérieure ou égale à 3 caractères
+  // ... (le reste de votre code pour extraire zonneDetag)
+  // Sélectionner les paragraphes tagués du DOM
+  const elementsTagues = document.querySelectorAll(
+    ".sectionTags__IngredientsAppareilsUstensilsTagues p"
+  );
+
+  // Convertir la NodeList en tableau
+  const elementsArray = Array.from(elementsTagues);
+
+  // Extraire le contenu textuel de chaque paragraphe
+  const textContents = elementsArray.map((paragraph) => paragraph.textContent);
+
+  // Convertir le contenu en minuscules
+  const lowercaseTextContents = textContents.map((text) => text.toLowerCase());
+
+  // Le résultat final attribué à la variable zonneDetag
+  let zonneDetag = lowercaseTextContents;
+
+
+  // Je vérifie si la longueur de la requête est supérieure ou égale à 3 caractères
   if (input.length >= 3) {
     const filteredRecipes = searchRecipes(
       input,
       ingredientsTagés,
       ustensilsTagés,
-      appareilsTagés
+      appareilsTagés,
+      zonneDetag
     );
-    // Effacer la section avant d'j'ajoute les nouvelles recettes
-    sectionArticleRecette.innerHTML = "";
-
-    // Générer et j'ajoute dynamiquement les articles de recette
-    filteredRecipes.forEach((recipe) => {
-      const recipeArticle = generateRecipeArticle(recipe);
-      sectionArticleRecette.appendChild(recipeArticle);
-    });
+    // Régénérer les articles de recette avec les nouvelles recettes filtrées
+    generateAndAppendRecipeArticles(filteredRecipes);
   } else {
-    // Si la longueur de la requête est inférieure à 3 caractères, réj'affiche tous les articles de recette
-    sectionArticleRecette.innerHTML = "";
-    recipes.forEach((recipe) => {
-      const recipeArticle = generateRecipeArticle(recipe);
-      sectionArticleRecette.appendChild(recipeArticle);
-    });
+    // Si la longueur de la requête est inférieure à 3 caractères, réafficher tous les articles de recette
+    generateAndAppendRecipeArticles(recipes);
   }
 });
+
+
+
+// Fonction pour initialiser et attacher l'observateur de mutation
+function initMutationObserver() {
+  const zonneDetagElement = document.querySelector(".sectionTags__IngredientsAppareilsUstensilsTagues");
+
+  // Initialiser l'observateur de mutation
+  const observer = new MutationObserver(function () {
+    // Extraire le contenu de zonneDetag et mettre à jour les articles de recette
+    const newZonneDetag = extractZonneDetagContent();
+    generateAndAppendRecipeArticles(searchRecipes(
+      searchInput.value.toLowerCase(),
+      ingredientsTagés,
+      ustensilsTagés,
+      appareilsTagés,
+      newZonneDetag
+    ));
+  });
+
+  // Configurer les options pour l'observateur de mutation
+  const observerOptions = {
+    childList: true, // Surveiller les modifications des enfants de zonneDetagElement
+    subtree: true,   // Surveiller les modifications dans tout l'arbre descendant
+  };
+
+  // Attacher l'observateur de mutation à zonneDetagElement
+  observer.observe(zonneDetagElement, observerOptions);
+}
+
+// Fonction pour extraire le contenu de zonneDetag et le convertir en array
+function extractZonneDetagContent() {
+  const elementsTagues = document.querySelectorAll(".sectionTags__IngredientsAppareilsUstensilsTagues p");
+  const elementsArray = Array.from(elementsTagues);
+  const textContents = elementsArray.map((paragraph) => paragraph.textContent);
+  return textContents.map((text) => text.toLowerCase());
+}
+
+// Appeler la fonction d'initialisation de l'observateur de mutation
+initMutationObserver();
 
 export default generateRecipeArticle;
