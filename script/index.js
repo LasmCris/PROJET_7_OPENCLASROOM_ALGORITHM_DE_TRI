@@ -222,7 +222,7 @@ searchInput.addEventListener("input", function () {
     // Soit j'affiche un message d'erreur soit ne rien faire.
     const errorParagraph = document.createElement("p");
     errorParagraph.classList.add("errorParagraph");
-    errorParagraph.textContent = `Aucune recette ne contient "${searchInput.value.toUpperCase()}" vous pouvez chercher "tarte aux pommes", "poisson"`;
+    errorParagraph.textContent = `Aucune recette ne contient "${searchInput.value.toUpperCase()}" vous pouvez chercher "tarte aux pommes", "poisson" ect ...`;
     sectionArticleRecette.appendChild(errorParagraph);
   }
 
@@ -240,11 +240,14 @@ function initMutationObserver() {
   // Initialiser l'observateur de mutation
   const observer = new MutationObserver(function () {
 
+    let recettesFiltres = searchRecipes(searchInput.value);
+    console.log(recettesFiltres);
+
     let ArrayRectteApresTags = filterRecipesByTags(
-      recipes,
+      recettesFiltres,
       ingredientsTagés,
       ustensilsTagés,
-      appareilsTagés,
+      appareilsTagés
     );
     
 
