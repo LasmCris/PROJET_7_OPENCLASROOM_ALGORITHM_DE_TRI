@@ -1,5 +1,6 @@
 // J'importe la variable `recipes` depuis le fichier de données
 import recipes from "/data/recipes.js";
+
 import {
   ingredientsTagés,
   ustensilsTagés,
@@ -127,37 +128,133 @@ if (Array.isArray(recipes) && recipes.length > 0) {
 // Sélecteur DOM de la barre de recherche
 const searchInput = document.querySelector(".formulaire__inputSearch");
 
-// // Sélecteur DOM de la section des articles de recette
-// const sectionArticleRecette = document.querySelector(".sectionArticleRecette");
 
-// Écouteur d'événements pour la saisie dans la barre de recherche
+// Sélectionner les paragraphes tagués du DOM
+const elementsTagues = document.querySelectorAll(
+  ".sectionTags__IngredientsAppareilsUstensilsTagues p"
+);
+
+    // Convertir la NodeList en tableau
+    const elementsArray = Array.from(elementsTagues);
+
+    // Extraire le contenu textuel de chaque paragraphe
+    const textContents = elementsArray.map((paragraph) => paragraph.textContent);
+
+    // Convertir le contenu en minuscules
+    const lowercaseTextContents = textContents.map((text) => text.toLowerCase());
+
+    // Le résultat final attribué à la variable zonneDetag
+    let zonneDetag = lowercaseTextContents;
+    console.log(zonneDetag);
+
+// Array qui stocke les recettes retenues après l'application du TAG
+const recettesApresTags = [];
+
+// Fonction de recherche étendue avec les tags sélectionnés
+function filterRecipesByTags(recipes, ingredientsTagés, ustensilsTagés, appareilsTagés) {
+  for (const recipe of recipes) {
+    // Vérification des tags d'ingrédients
+    const ingredientsPresent = ingredientsTagés.every((tag) =>
+      recipe.ingredients.some((ingredient) =>
+        ingredient.ingredient.toLowerCase().includes(tag)
+      )
+    );
+    // Ajout de la recette à recettesApresTags seulement si l'ingrédient est présent dans l'array
+    if (ingredientsPresent) {
+      recettesApresTags.push(recipe);
+    }
+
+    // Vérification des tags d'ustensiles
+    const ustensilsPresent = ustensilsTagés.every((tag) =>
+      recipe.ustensils.map((ustensil) => ustensil.toLowerCase()).includes(tag)
+    );
+    // Ajout de la recette à recettesApresTags seulement si l'ustensil est présent dans l'array
+    if (ustensilsPresent) {
+      recettesApresTags.push(recipe);
+    }
+
+    // Vérification des tags d'appareils
+    const appareilPresent = appareilsTagés.includes(
+      recipe.appliance && recipe.appliance.toLowerCase()
+    );
+    // Ajout de la recette à recettesApresTags seulement si l'appareil est présent dans l'array
+    if (appareilPresent) {
+      recettesApresTags.push(recipe);
+    }
+
+  }
+
+  return recettesApresTags;
+}
+
+
+
+
+// Fonction pour générer et ajouter dynamiquement les articles de recette
+function generateAndAppendRecipeArticles(recipes) {
+  sectionArticleRecette.innerHTML = "";
+
+  recipes.forEach((recipe) => {
+    const recipeArticle = generateRecipeArticle(recipe);
+    sectionArticleRecette.appendChild(recipeArticle);
+  });
+}
+
+// Écouteur d'événement pour la saisie de recherche
 searchInput.addEventListener("input", function () {
   const input = searchInput.value.toLowerCase();
 
-  // Je verifie si la longueur de la requête est supérieure ou égale à 3 caractères
+  // Je vérifie si la longueur de la requête est supérieure ou égale à 3 caractères
   if (input.length >= 3) {
-    const recettesApresFiltres = searchRecipes(
-      input,
+    const filteredRecipes = searchRecipes(
+      input
+    );
+    // Régénérer les articles de recette avec les nouvelles recettes filtrées
+    generateAndAppendRecipeArticles(filteredRecipes);
+  } else {
+    // Si la longueur de la requête est inférieure à 3 caractères, réafficher tous les articles de recette
+    generateAndAppendRecipeArticles(recipes);
+  }
+
+  
+});
+
+
+
+// Fonction pour initialiser et attacher l'observateur de mutation
+function initMutationObserver() {
+  const zonneDetagElement = document.querySelector(
+    ".sectionTags__IngredientsAppareilsUstensilsTagues"
+  );
+
+  // Initialiser l'observateur de mutation
+  const observer = new MutationObserver(function () {
+
+    let ArrayRectteApresTags = filterRecipesByTags(
+      recipes,
       ingredientsTagés,
       ustensilsTagés,
-      appareilsTagés
+      appareilsTagés,
     );
-    // Effacer la section avant d'j'ajoute les nouvelles recettes
-    sectionArticleRecette.innerHTML = "";
+    
 
-    // Générer et j'ajoute dynamiquement les articles de recette
-    recettesApresFiltres.forEach((recipe) => {
-      const recipeArticle = generateRecipeArticle(recipe);
-      sectionArticleRecette.appendChild(recipeArticle);
-    });
-  } else {
-    // Si la longueur de la requête est inférieure à 3 caractères, réj'affiche tous les articles de recette
-    sectionArticleRecette.innerHTML = "";
-    recipes.forEach((recipe) => {
-      const recipeArticle = generateRecipeArticle(recipe);
-      sectionArticleRecette.appendChild(recipeArticle);
-    });
-  }
-});
+    generateAndAppendRecipeArticles(ArrayRectteApresTags);
+  });
+
+  
+
+  // Configurer les options pour l'observateur de mutation
+  const observerOptions = {
+    childList: true, // Surveiller les modifications des enfants de zonneDetagElement
+    subtree: true, // Surveiller les modifications dans tout l'arbre descendant
+  };
+
+  // Attacher l'observateur de mutation à zonneDetagElement
+  observer.observe(zonneDetagElement, observerOptions);
+}
+
+
+// Appeler la fonction d'initialisation de l'observateur de mutation
+initMutationObserver();
 
 export default generateRecipeArticle;
