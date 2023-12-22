@@ -121,37 +121,39 @@ if (Array.isArray(recipes) && recipes.length > 0) {
     sectionArticleRecette.appendChild(recipeArticle);
   });
 } else {
-  // ICI je Gére le cas où `recipes` n'est pas défini ou vide
-  // Soit j'affiche un message d'erreur soit ne rien faire.
 }
 
 // Sélecteur DOM de la barre de recherche
 const searchInput = document.querySelector(".formulaire__inputSearch");
-
 
 // Sélectionner les paragraphes tagués du DOM
 const elementsTagues = document.querySelectorAll(
   ".sectionTags__IngredientsAppareilsUstensilsTagues p"
 );
 
-    // Convertir la NodeList en tableau
-    const elementsArray = Array.from(elementsTagues);
+// Convertir la NodeList en tableau
+const elementsArray = Array.from(elementsTagues);
 
-    // Extraire le contenu textuel de chaque paragraphe
-    const textContents = elementsArray.map((paragraph) => paragraph.textContent);
+// Extraire le contenu textuel de chaque paragraphe
+const textContents = elementsArray.map((paragraph) => paragraph.textContent);
 
-    // Convertir le contenu en minuscules
-    const lowercaseTextContents = textContents.map((text) => text.toLowerCase());
+// Convertir le contenu en minuscules
+const lowercaseTextContents = textContents.map((text) => text.toLowerCase());
 
-    // Le résultat final attribué à la variable zonneDetag
-    let zonneDetag = lowercaseTextContents;
-    console.log(zonneDetag);
+// Le résultat final attribué à la variable zonneDetag
+let zonneDetag = lowercaseTextContents;
+console.log(zonneDetag);
 
 // Array qui stocke les recettes retenues après l'application du TAG
 const recettesApresTags = [];
 
 // Fonction de recherche étendue avec les tags sélectionnés
-function filterRecipesByTags(recipes, ingredientsTagés, ustensilsTagés, appareilsTagés) {
+function filterRecipesByTags(
+  recipes,
+  ingredientsTagés,
+  ustensilsTagés,
+  appareilsTagés
+) {
   for (const recipe of recipes) {
     // Vérification des tags d'ingrédients
     const ingredientsPresent = ingredientsTagés.every((tag) =>
@@ -181,14 +183,10 @@ function filterRecipesByTags(recipes, ingredientsTagés, ustensilsTagés, appare
     if (appareilPresent) {
       recettesApresTags.push(recipe);
     }
-
   }
 
   return recettesApresTags;
 }
-
-
-
 
 // Fonction pour générer et ajouter dynamiquement les articles de recette
 function generateAndAppendRecipeArticles(recipes) {
@@ -204,22 +202,26 @@ function generateAndAppendRecipeArticles(recipes) {
 searchInput.addEventListener("input", function () {
   const input = searchInput.value.toLowerCase();
 
+  const filteredRecipes = searchRecipes(input);
   // Je vérifie si la longueur de la requête est supérieure ou égale à 3 caractères
   if (input.length >= 3) {
-    const filteredRecipes = searchRecipes(
-      input
-    );
+    console.log(filteredRecipes);
     // Régénérer les articles de recette avec les nouvelles recettes filtrées
     generateAndAppendRecipeArticles(filteredRecipes);
-  } else {
+  } else if (input.length <= 3) {
     // Si la longueur de la requête est inférieure à 3 caractères, réafficher tous les articles de recette
     generateAndAppendRecipeArticles(recipes);
   }
 
-  
+  if (filteredRecipes.length <= 1) {
+    // ICI je Gére le cas où `recipes` n'est pas défini ou vide
+    // Soit j'affiche un message d'erreur soit ne rien faire.
+    const errorParagraph = document.createElement("p");
+    errorParagraph.classList.add("errorParagraph");
+    errorParagraph.textContent = `Aucune recette ne contient "${searchInput.value.toUpperCase()}" vous pouvez chercher "tarte aux pommes", "poisson" ect ..`;
+    sectionArticleRecette.appendChild(errorParagraph);
+  }
 });
-
-
 
 // Fonction pour initialiser et attacher l'observateur de mutation
 function initMutationObserver() {
@@ -229,19 +231,15 @@ function initMutationObserver() {
 
   // Initialiser l'observateur de mutation
   const observer = new MutationObserver(function () {
-
     let ArrayRectteApresTags = filterRecipesByTags(
       recipes,
       ingredientsTagés,
       ustensilsTagés,
-      appareilsTagés,
+      appareilsTagés
     );
-    
 
     generateAndAppendRecipeArticles(ArrayRectteApresTags);
   });
-
-  
 
   // Configurer les options pour l'observateur de mutation
   const observerOptions = {
@@ -252,7 +250,6 @@ function initMutationObserver() {
   // Attacher l'observateur de mutation à zonneDetagElement
   observer.observe(zonneDetagElement, observerOptions);
 }
-
 
 // Appeler la fonction d'initialisation de l'observateur de mutation
 initMutationObserver();
