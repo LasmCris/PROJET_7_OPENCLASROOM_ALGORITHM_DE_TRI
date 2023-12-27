@@ -336,7 +336,7 @@ function displayAppareils(appareils) {
           // je retire le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
           selectedAppareilsDiv.removeChild(selectedAppareilClone);
           taggedAppareilsDiv.removeChild(taggedAppareilClone); // je retire également de .sectionTags__appareilsTagues
-
+          logicDeRecherche();
           // je retire le texte du paragraphe du tableau appareilsTagés
           appareilsTagés = appareilsTagés.filter((texte) => texte !== appareil);
           console.log(appareilsTagés);
@@ -548,7 +548,7 @@ function displayUstensils(ustensils) {
           // je retire le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
           selectedUstensilsDiv.removeChild(selectedUstensilClone);
           taggedUstensilsDiv.removeChild(taggedUstensilClone); // je retire également de .sectionTags__ustensilsTagues
-
+          logicDeRecherche();
           // je retire le texte du paragraphe du tableau ustensilsTagés
           ustensilsTagés = ustensilsTagés.filter((texte) => texte !== ustensil);
           console.log(ustensilsTagés);
