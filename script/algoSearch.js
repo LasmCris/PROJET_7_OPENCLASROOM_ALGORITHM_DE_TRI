@@ -1,15 +1,19 @@
 // Import de la fonction et de l'objet recipes
 import recipes from "/data/recipes.js";
 
+import {
+  appareilsTagés,
+  ingredientsTagés,
+  ustensilsTagés,
+} from "./optionSelect.js";
 
+import {filterRecipesByTags} from "./index.js";
 
-
-
-function searchRecipes(input,) 
-{
+function searchRecipes(input) {
   const recettesApresFiltres = [];
 
-  for (const recipe of recipes) {
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
     const inputEnMinuscule = input.toLowerCase();
     const nomRecetteEnMinuscule = recipe.name.toLowerCase();
     const descrRecetteEnMinuscule = recipe.description.toLowerCase();
@@ -24,19 +28,25 @@ function searchRecipes(input,)
       dedans = true;
       recettesApresFiltres.push(recipe);
     } else {
-      for (const ingredient of recipe.ingredients) {
+      for (let j = 0; j < recipe.ingredients.length; j++) {
+        const ingredient = recipe.ingredients[j];
         if (ingredient.ingredient.toLowerCase().includes(inputEnMinuscule)) {
           dedans = true;
           break;
         }
       }
     }
-
   }
+
+   filterRecipesByTags(
+     recettesApresFiltres,
+     appareilsTagés,
+     ingredientsTagés,
+     ustensilsTagés
+   );
+  
 
   return recettesApresFiltres;
 }
-
-
 
 export default searchRecipes;

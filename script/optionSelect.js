@@ -1,5 +1,6 @@
 // J'importe la variable `recipes` depuis le fichier de données
 import recipes from "/data/recipes.js";
+import {logicDeRecherche} from "./index.js";
 
 //***************************************************************************** */
 
@@ -111,13 +112,14 @@ function displayIngredients(ingredients) {
 
         taggedIngredientsDiv.appendChild(taggedIngredientClone);
         taggedIngredientClone.appendChild(closeIcon2);
+        logicDeRecherche();
 
         // j'ajoute un gestionnaire d'événements à l'icône de fermeture
         closeIcon2.addEventListener("click", function () {
           // je retire le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
           selectedIngredientsDiv.removeChild(selectedIngredientClone);
           taggedIngredientsDiv.removeChild(taggedIngredientClone); // je retire également de .sectionTags__IngredientsTagues
-
+          logicDeRecherche();
           // je retire le texte du paragraphe du tableau ingredientsTagés
           ingredientsTagés = ingredientsTagés.filter(
             (texte) => texte !== ingredient
@@ -268,6 +270,7 @@ function displayAppareils(appareils) {
 
     // j'ajoute un gestionnaire d'événements au paragraphe cloné
     templateParagraph.addEventListener("click", function () {
+
       // Je verifie si l'élément est déjà présent dans la liste
       if (!appareilsTagés.includes(appareil)) {
         // Je clone l'élément cliqué dans la div de classe .myDropdown2__divAppareilsSelectionnés
@@ -325,6 +328,8 @@ function displayAppareils(appareils) {
 
         taggedAppareilsDiv.appendChild(taggedAppareilClone);
         taggedAppareilClone.appendChild(closeIcon2);
+
+        logicDeRecherche();
 
         // j'ajoute un gestionnaire d'événements à l'icône de fermeture
         closeIcon2.addEventListener("click", function () {
@@ -456,6 +461,7 @@ console.log(arrayDesUstensils);
 // Je declare un tableau pour stocker les textes des paragraphes d'ustensils tagés
 export var ustensilsTagés = [];
 
+
 function displayUstensils(ustensils) {
   var dropdownContent = document.querySelector(
     "#myDropdown3 #myDropdownContent"
@@ -535,6 +541,7 @@ function displayUstensils(ustensils) {
 
         taggedUstensilsDiv.appendChild(taggedUstensilClone);
         taggedUstensilClone.appendChild(closeIcon2);
+        logicDeRecherche();
 
         // j'ajoute un gestionnaire d'événements à l'icône de fermeture
         closeIcon2.addEventListener("click", function () {
