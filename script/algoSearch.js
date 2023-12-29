@@ -1,13 +1,6 @@
 // Import de la fonction et de l'objet recipes
 import recipes from "/data/recipes.js";
 
-import {
-  appareilsTagés,
-  ingredientsTagés,
-  ustensilsTagés,
-} from "./optionSelect.js";
-
-import {filterRecipesByTags} from "./index.js";
 
 function searchRecipes(input) {
   const recettesApresFiltres = [];
@@ -37,13 +30,6 @@ function searchRecipes(input) {
       }
     }
   }
-
-   filterRecipesByTags(
-     recettesApresFiltres,
-     appareilsTagés,
-     ingredientsTagés,
-     ustensilsTagés
-   );
   
 
   return recettesApresFiltres;

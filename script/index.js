@@ -150,23 +150,23 @@ export function filterRecipesByTags(
   // Array qui stocke les recettes retenues après l'application du TAG
   let recettesApresTags = [];
 
+  console.log(recipes, ingredientsTagés, ustensilsTagés, appareilsTagés);
+
   for (const recipe of recipes) {
     // Vérification des tags d'ingrédients
     const ingredientsPresent = ingredientsTagés.every((tag) =>
-      recipe.ingredients.some((ingredient) =>
-        ingredient.ingredient.toLowerCase().includes(tag)
-      )
+      recipe.ingredients.map((ingredient) => ingredient.ingredient.toLowerCase()).includes(tag.toLowerCase())
     );
 
     // Vérification des tags d'ustensiles
     const ustensilsPresent = ustensilsTagés.every((tag) =>
-      recipe.ustensils.map((ustensil) => ustensil.toLowerCase()).includes(tag)
+      recipe.ustensils.map((ustensil) => ustensil.toLowerCase()).includes(tag.toLowerCase())
     );
 
     // Vérification des tags d'appareils
-    const appareilPresent = appareilsTagés.includes(
-      recipe.appliance && recipe.appliance.toLowerCase()
-    );
+    const appareilPresent = appareilsTagés.length === 0 ? true : appareilsTagés
+      .map((appareil) => appareil.toLowerCase())
+      .includes(recipe.appliance.toLowerCase());
 
     // Ajout de la recette à recettesApresTags seulement si elle satisfait toutes les conditions
     if (ingredientsPresent && ustensilsPresent && appareilPresent) {
@@ -188,43 +188,60 @@ export function logicDeRecherche () {
   const input = searchInput.value.toLowerCase();
 
   //Variables qui contients la liste des recettes, apres resultat de recherche
-  let filteredRecipes = [];
+  let filteredRecipes = recipes;
 
-  // Je vérifie si la longueur de la requête est supérieure ou égale à 3 caractères
-  if (input.length >= 3) {
-    filteredRecipes = searchRecipes(input);
-    console.log(filteredRecipes);
-    // Régénérer les articles de recette avec les nouvelles recettes filtrées
-    generateAndAppendRecipeArticles(filteredRecipes);
-
-  }
+  //Variables qui contients la liste des recettes, apres L'application du TAG
+  let recetteApresTag = [];
 
   // la variable addedTag est vrai seulement si au moins un des 3 arrays a une eleent
   let addedTag =
     ingredientsTagés.some(Boolean) ||
     ustensilsTagés.some(Boolean) ||
     appareilsTagés.some(Boolean);
-  
-  // // Si la fonction "addesTag" est vrai, alors je filtre par Tag 
-  // if (addedTag) {
-  //   console.log("il ya des elemnt TAG");
-  //   filterRecipesByTags(
-  //     recipes,
-  //     ingredientsTagés,
-  //     ustensilsTagés,
-  //     appareilsTagés
-  //   );
-  // }
-   
 
-  if (filteredRecipes.length <= 0) {
+  // Je vérifie si la longueur de la requête est supérieure ou égale à 3 caractères
+  if (input.length >= 3) {
+    filteredRecipes = searchRecipes(input);
+    console.log(filteredRecipes);
+
+  }
+  
+  if (addedTag) {
+    // Si la fonction "addesTag" est vrai, alors je filtre par Tag
+    console.log("il ya des elemnt TAG");
+    filteredRecipes = filterRecipesByTags(
+      filteredRecipes,
+      ingredientsTagés,
+      ustensilsTagés,
+      appareilsTagés
+    );
+  }
+
+  //MESSSAGE D'ERREUR POUR RECHERCHE
+  if (filteredRecipes.length === 0) {
     // ICI je Gére le cas où `recipes` n'est pas défini ou vide
     // Soit j'affiche un message d'erreur soit ne rien faire.
+    sectionArticleRecette.innerHTML = "";
     const errorParagraph = document.createElement("p");
     errorParagraph.classList.add("errorParagraph");
     errorParagraph.textContent = `Aucune recette ne contient "${searchInput.value.toUpperCase()}" vous pouvez chercher "tarte aux pommes", "poisson" ect ..`;
     sectionArticleRecette.appendChild(errorParagraph);
+  } else {
+    generateAndAppendRecipeArticles(filteredRecipes);
   }
+
+  // Va mettre a jours le nombre de recettes
+  
+
+  //MESSSAGE D'ERREUR POUR TAG
+  // if (recetteApresTag.length === 0 && !(filteredRecipes.length === 0)) {
+  //   // ICI je Gére le cas où `recipes` n'est pas défini ou vide
+  //   // Soit j'affiche un message d'erreur soit ne rien faire.
+  //   const errorParagraph = document.createElement("p");
+  //   errorParagraph.classList.add("errorParagraph");
+  //   errorParagraph.textContent = "Aucune recette ne coresspond a ton TAG";
+  //   sectionArticleRecette.appendChild(errorParagraph);
+  // }
 };
 
 
