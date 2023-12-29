@@ -1,5 +1,6 @@
 // J'importe la variable `recipes` depuis le fichier de données
 import recipes from "/data/recipes.js";
+import { logicDeRecherche } from "./index.js";
 
 //***************************************************************************** */
 
@@ -111,6 +112,7 @@ function displayIngredients(ingredients) {
 
         taggedIngredientsDiv.appendChild(taggedIngredientClone);
         taggedIngredientClone.appendChild(closeIcon2);
+        logicDeRecherche();
 
         // j'ajoute un gestionnaire d'événements à l'icône de fermeture
         closeIcon2.addEventListener("click", function () {
@@ -122,6 +124,7 @@ function displayIngredients(ingredients) {
           ingredientsTagés = ingredientsTagés.filter(
             (texte) => texte !== ingredient
           );
+          logicDeRecherche();
           console.log(ingredientsTagés);
         });
       }
@@ -326,6 +329,8 @@ function displayAppareils(appareils) {
         taggedAppareilsDiv.appendChild(taggedAppareilClone);
         taggedAppareilClone.appendChild(closeIcon2);
 
+        logicDeRecherche();
+
         // j'ajoute un gestionnaire d'événements à l'icône de fermeture
         closeIcon2.addEventListener("click", function () {
           // je retire le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
@@ -334,6 +339,7 @@ function displayAppareils(appareils) {
 
           // je retire le texte du paragraphe du tableau appareilsTagés
           appareilsTagés = appareilsTagés.filter((texte) => texte !== appareil);
+          logicDeRecherche();
           console.log(appareilsTagés);
         });
       }
@@ -535,15 +541,16 @@ function displayUstensils(ustensils) {
 
         taggedUstensilsDiv.appendChild(taggedUstensilClone);
         taggedUstensilClone.appendChild(closeIcon2);
+        logicDeRecherche();
 
         // j'ajoute un gestionnaire d'événements à l'icône de fermeture
         closeIcon2.addEventListener("click", function () {
           // je retire le paragraphe correspondant lorsqu'on clique sur l'icône de fermeture
           selectedUstensilsDiv.removeChild(selectedUstensilClone);
           taggedUstensilsDiv.removeChild(taggedUstensilClone); // je retire également de .sectionTags__ustensilsTagues
-
           // je retire le texte du paragraphe du tableau ustensilsTagés
           ustensilsTagés = ustensilsTagés.filter((texte) => texte !== ustensil);
+          logicDeRecherche();
           console.log(ustensilsTagés);
         });
       }
