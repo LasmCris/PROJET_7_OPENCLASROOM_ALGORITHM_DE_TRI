@@ -228,16 +228,13 @@ export function logicDeRecherche() {
   }
 
   // Va mettre a jours le nombre de recettes
-
-  //MESSSAGE D'ERREUR POUR TAG
-  // if (recetteApresTag.length === 0 && !(filteredRecipes.length === 0)) {
-  //   // ICI je Gére le cas où `recipes` n'est pas défini ou vide
-  //   // Soit j'affiche un message d'erreur soit ne rien faire.
-  //   const errorParagraph = document.createElement("p");
-  //   errorParagraph.classList.add("errorParagraph");
-  //   errorParagraph.textContent = "Aucune recette ne coresspond a ton TAG";
-  //   sectionArticleRecette.appendChild(errorParagraph);
-  // }
+  function miseAJourNbrRecette() {
+    let paragrapheNbrDeRecette = document.querySelector(".nbrDeRecette");
+    paragrapheNbrDeRecette.textContent = "";
+    paragrapheNbrDeRecette.textContent = `${filteredRecipes.length} Recettes`;
+  }
+  miseAJourNbrRecette();
+  
 }
 
 // Écouteur d'événement pour la saisie de recherche
